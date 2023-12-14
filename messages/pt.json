@@ -146,5 +146,11 @@
             "description": "Ocorreu um erro interno no servidor.",
             "button": "Voltar para a página inicial"
         }
+    },
+    "Metadata": {
+        "Home": {
+            "title": "Ronilson Alves - Desenvolvedor de Software",
+            "description": "Astrofotografo, astrônomo amador e também desenvolvedor de software com mais de 2 anos de experiência no desenvolvimento de aplicações web usando Java, Spring, Go lang, TypeScript e React."
+        }
     }
 }
