@@ -1,5 +1,4 @@
 import {defineType, defineArrayMember} from 'sanity'
-import {copyPaste} from '@superside-oss/sanity-plugin-copy-paste'
 
 
 /**
