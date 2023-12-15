@@ -73,3 +73,10 @@ export const pageWithTranslationsQuery = groq`*[_type == "page" && slug.current 
   }
 }`;
 
+export const getPagesSlugByLanguageQuery = groq`*[_type == "page" && language == $language][]{
+  "slug": slug.current
+}`;
+
+export const getPostsSlugByLanguageQuery = groq`*[_type == "post" && language == $language][]{
+  "slug": slug.current
+}`;

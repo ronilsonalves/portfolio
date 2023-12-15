@@ -36,7 +36,7 @@ export const AdSenseComponent = () => {
     <>
       <ins
         key={Math.random()}
-        className="adsbygoogle"
+        className="adsbygoogle bg-white dark:bg-black"
         style={{ display: "block", textAlign: "center" }}
         data-ad-client={config.client}
         data-ad-slot="8285876059"
