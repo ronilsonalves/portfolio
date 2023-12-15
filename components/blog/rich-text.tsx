@@ -13,6 +13,7 @@ import yaml from "highlight.js/lib/languages/yaml";
 import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
 import Adsense from "../shared/adsense";
+import Ads from "../shared/newAd";
 
 const builder = imageUrlBuilder(client);
 
@@ -117,13 +118,9 @@ export const RichTextComponents = {
     },
     ads: ({ value }: any) => {
       return (
-        <div className="flex flex-col justify-center mx-8 px-8 py-8">
-          <Adsense
-            adsenseClient={value.adsenseClient}
-            adsenseSlot={value.adsenseSlot}
-            adsenseFormat={value.adsenseFormat}
-            adsenseLayout={value.adsenseLayout}
-          />
+        <div className="flex flex-col justify-center">
+          <Ads currentPath={value._key} />
+          <Adsense adsenseClient={value.adsenseClient} adsenseSlot={value.adsenseSlot}/>
         </div>
       );
     },
