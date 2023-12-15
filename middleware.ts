@@ -15,5 +15,5 @@ export const config = {
   matcher: [
     '/',
     '/(en|pt)/:path*',
-    '/((?!api|_next|_vercel|studio|.*\\..*).*)']
+    '/((?!api|_next|_vercel|studio|ads.txt|.*\\..*).*)']
 };
