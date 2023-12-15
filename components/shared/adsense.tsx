@@ -26,36 +26,9 @@ export const AdSenseComponent = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  if (process.env.NODE_ENV === "development") {
-    return null;
-  }
   useEffect(() => {
-    const url = `${pathname}?${searchParams.toString()}`;
-    console.log("url", url);
-    console.log("Adsense -> Router change", url);
-
-    const scriptElement = document.querySelector(`script[src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${config.client}"]`)
-    //const scriptElement = document.querySelector('#adsenseCa');
-    const handleScriptLoad = () => {
-      try {
-        if (window.adsbygoogle) {
-          window.adsbygoogle.push({})
-        } else {
-        scriptElement?.addEventListener("load", () => {
-          handleScriptLoad();
-        });
-      }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    handleScriptLoad();
-
-    return () => {
-      if (scriptElement) {
-        scriptElement.removeEventListener("load", handleScriptLoad);
-      }
+    if (window) {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
     }
   }, [pathname, searchParams]);
 
