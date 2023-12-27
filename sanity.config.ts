@@ -5,7 +5,6 @@
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { codeInput } from "@sanity/code-input";
-import { copyPastePlugin } from "@superside-oss/sanity-plugin-copy-paste";
 import { deskTool } from "sanity/desk";
 import { documentInternationalization } from "@sanity/document-internationalization";
 import { internationalizedArray } from "sanity-plugin-internationalized-array";
@@ -63,7 +62,6 @@ export default defineConfig({
         },
       ],
     }),
-    copyPastePlugin(),
     documentInternationalization({
       supportedLanguages: [
         { id: "en", title: "English" },
