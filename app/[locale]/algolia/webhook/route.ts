@@ -46,6 +46,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
     );
   }
 
+  if (
+    req.headers.get("x-sanity-webhook-token") !== config.sanityWebhookSecret
+  ) {
+    return new Response(
+      JSON.stringify({
+        message: "Unauthorized",
+      }),
+      { status: 401 }
+    );
+  }
+
   // Configure this to match an existing Algolia index name
   const algoliaIndex = algolia.initIndex(config.algoliaIndexName!);
 
@@ -116,13 +127,13 @@ export async function POST(req: NextRequest, res: NextResponse) {
     }
   );
 
-  console.log(await req.body?.getReader().read())
+  console.log(await req.body?.getReader().read());
 
   const parsedWebhookBody = await req.body
     ?.getReader()
     .read()
     .then(({ value }) => {
-      console.log(value)
+      console.log(value);
       return JSON.parse(new TextDecoder().decode(value));
     });
 
@@ -130,18 +141,22 @@ export async function POST(req: NextRequest, res: NextResponse) {
   // configured serializers and optional visibility function. `webhookSync` will
   // inspect the webhook payload, make queries back to Sanity with the `sanity`
   // client and make sure the algolia indices are synced to match.
-  return sanityAlgolia
+  sanityAlgolia
     .webhookSync(sanity, parsedWebhookBody as WebhookBody)
     .then(() => {
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ message: "Success" }),
-      };
+      return new Response(
+        JSON.stringify({
+          message: "Success",
+        }),
+        { status: 200 }
+      );
     })
     .catch((err) => {
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ message: "Something went wrong" }),
-      };
+      return new Response(
+        JSON.stringify({
+          message: "Something went wrong",
+        }),
+        { status: 500 }
+      );
     });
 }
