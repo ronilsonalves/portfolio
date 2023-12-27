@@ -17,7 +17,7 @@ export default async function Sitemap(): Promise<{ url: string; lastModified?: s
     const pagesSlug: string[] = [];
     await generatePagesSlugs("en").then(slugs => {
         slugs.forEach((page:any) => {
-            pagesSlug.push("/"+page.slug)
+            pagesSlug.push(page.slug)
         })
     })
     await generatePagesSlugs("pt").then(slugs => {

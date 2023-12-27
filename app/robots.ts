@@ -23,5 +23,6 @@ export default function Robots(): MetadataRoute.Robots {
         disallow: "/studio/",
       }
     ],
+    sitemap: process.env.NEXT_PUBLIC_SITE_URL + "/sitemap.xml",
   };
 }
