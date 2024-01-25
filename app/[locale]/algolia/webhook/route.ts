@@ -39,8 +39,6 @@ const client = createClient({
  * @returns A response object.
  */
 export async function POST(req: NextRequest) {
-  // Tip: Add webhook secrets to verify that the request is coming from Sanity.
-  // See more at: https://www.sanity.io/docs/webhooks#bfa1758643b3
   if (req.headers.get("content-type") !== "application/json") {
     return new Response(
       JSON.stringify({
@@ -123,6 +121,15 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
   }
+
+  // Return a response to acknowledge the webhook.
+  console.info("Webhook processed successfully!");
+  return new Response(
+    JSON.stringify({
+      message: "Success",
+    }),
+    { status: 200 }
+  );
 }
 
 /**
@@ -173,6 +180,7 @@ export async function GET(req: NextRequest) {
     );
   });
 
+  
   return new Response(
     JSON.stringify({
       message: "Success",
@@ -226,7 +234,7 @@ function initSanityAlgoliaIndexer(language: string, algoliaIndexName: any) {
  * @returns A response object.
  */
 async function synchAlgoliaIndex(indexed: any, client: SanityClient, body: WebhookBody) {
-  await indexed.webhookSync(client, body).then(() => {
+  return indexed.webhookSync(client, body).then(() => {
     console.info("Webhook synced successfully!");
     return new Response(
       JSON.stringify({
