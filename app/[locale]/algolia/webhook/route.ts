@@ -1,9 +1,6 @@
 import { NextRequest } from "next/server";
 import algoliasearch from "algoliasearch";
-import { createClient, type SanityDocumentStub } from "@sanity/client";
-// TODO: Use the client from the lib folder
-import { client } from "@/sanity/lib/client";
-import { sanityFetch } from "@/sanity/lib/fetch";
+import { createClient, type SanityDocumentStub, type SanityClient } from "@sanity/client";
 import indexer from "sanity-algolia";
 import { WebhookBody } from "sanity-algolia/dist/types";
 
@@ -27,7 +24,7 @@ const algolia = algoliasearch(
   config.algoliaAdminApiKey!
 );
 
-const sanity = createClient({
+const client = createClient({
   projectId: config.sanityProjectId!,
   dataset: config.sanityDataset!,
   token: config.sanityReadToken!,
@@ -37,7 +34,9 @@ const sanity = createClient({
 
 /**
  *  This function receives webhook POSTs from Sanity and updates, creates or
- *  deletes records in the corresponding Algolia indices.
+ *  deletes records in the corresponding Algolia indexes.
+ * @param req - The NextRequest object.
+ * @returns A response object.
  */
 export async function POST(req: NextRequest) {
   // Tip: Add webhook secrets to verify that the request is coming from Sanity.
@@ -53,7 +52,7 @@ export async function POST(req: NextRequest) {
   }
 
   if (
-    req.headers.get("x-sanity-webhook-token") !== config.sanityWebhookSecret
+    req.headers.get("Authorization")?.slice(7) !== config.sanityWebhookSecret
   ) {
     return new Response(
       JSON.stringify({
@@ -64,111 +63,72 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Configure this to match an existing Algolia index name
+  if (
+    req.headers.get("Language") !== "en" &&
+    req.headers.get("Language") !== "pt"
+  ) {
+    return new Response(
+      JSON.stringify({
+        message: "Bad request",
+        details: "Invalid or missing language header",
+      }),
+      { status: 400 }
+    );
+  }
+
+  console.info("Webhook received...");
+
   const algoliaIndex = algolia.initIndex(config.algoliaIndexName!);
+  const algoliaPtIndex = algolia.initIndex(config.algoliaPtIndexName!);
 
-  const sanityAlgolia = indexer(
-    // The first parameter maps a Sanity document type to its respective Algolia
-    // search index. In this example both `post` and `article` Sanity types live
-    // in the same Algolia index. Optionally you can also customize how the
-    // document is fetched from Sanity by specifying a GROQ projection.
-    //
-    // In this example we fetch the plain text from Portable Text rich text
-    // content via the pt::text function.
-    //
-    // _id and other system fields are handled automatically.
-    {
-      post: {
-        index: algoliaIndex,
-        projection: `{
-          title,
-          "path": slug.current,
-          "body": pt::text(body)
-        }`,
-      },
-      // For the article document in this example we want to resolve a list of
-      // references to authors and get their names as an array. We can do this
-      // directly in the GROQ query in the custom projection.
-      article: {
-        index: algoliaIndex,
-        projection: `{
-          title,
-          summary,
-          "slug": slug.current,
-          "body": pt::text(body)
-        }`,
-      },
-    },
-
-    // The second parameter is a function that maps from a fetched Sanity document
-    // to an Algolia Record. Here you can do further mutations to the data before
-    // it is sent to Algolia.
-    (document: SanityDocumentStub) => {
-      switch (document._type) {
-        case "post":
-          return {
-            title: document.title,
-            summary: document.summary,
-            slug: document.slug,
-            body: document.body,
-          };
-        default:
-          return document;
-      }
-    },
-    // Visibility function (optional).
-    //
-    // The third parameter is an optional visibility function. Returning `true`
-    // for a given document here specifies that it should be indexed for search
-    // in Algolia. This is handy if for instance a field value on the document
-    // decides if it should be indexed or not. This would also be the place to
-    // implement any `publishedAt` datetime visibility rules or other custom
-    // visibility scheme you may be using.
-    (document: SanityDocumentStub) => {
-      if (document.hasOwnProperty("isHidden")) {
-        return !document.isHidden;
-      }
-      return true;
-    }
-  );
+  const sanityEn = initSanityAlgoliaIndexer("en", algoliaIndex);
+  const sanityPt = initSanityAlgoliaIndexer("pt", algoliaPtIndex);
 
   const parsedWebhookBody = await req.body
     ?.getReader()
     .read()
     .then(({ value }) => {
-      console.log(value);
-      return JSON.parse(new TextDecoder().decode(value));
+      console.info("Parsing webhook body...");
+      try {
+        return JSON.parse(new TextDecoder().decode(value));
+      } catch (err) {
+        console.error("Error parsing webhook body", err);
+        return { status: 400 };
+      }
     });
 
-  // Finally connect the Sanity webhook payload to Algolia indices via the
-  // configured serializers and optional visibility function. `webhookSync` will
-  // inspect the webhook payload, make queries back to Sanity with the `sanity`
-  // client and make sure the algolia indices are synced to match.
-  sanityAlgolia
-    .webhookSync(sanity, parsedWebhookBody as WebhookBody)
-    .then(() => {
+  if (parsedWebhookBody?.status === 400) {
+    return new Response(
+      JSON.stringify({
+        message: "Bad request",
+        details: "Invalid webhook body",
+      }),
+      { status: 400 }
+    );
+  }
+
+  switch (req.headers.get("Language")) {
+    case "en":
+      await synchAlgoliaIndex(sanityEn, client, parsedWebhookBody as WebhookBody);
+      break;
+    case "pt":
+      await synchAlgoliaIndex(sanityPt, client, parsedWebhookBody as WebhookBody);
+      break;
+    default:
       return new Response(
         JSON.stringify({
-          message: "Success",
+          message: "Bad request",
+          details: "Invalid or missing language header",
         }),
-        { status: 200 }
+        { status: 400 }
       );
-    })
-    .catch((err) => {
-      return new Response(
-        JSON.stringify({
-          message: "Something went wrong",
-          details: err,
-        }),
-        { status: 500 }
-      );
-    });
+  }
 }
 
 /**
  * This function is used to index all documents in Sanity to Algolia for the first time.
- * @param req 
- * @returns 
+ * @param req - The NextRequest object.
+ * @returns A response object.
  */
 export async function GET(req: NextRequest) {
   if (
@@ -185,19 +145,54 @@ export async function GET(req: NextRequest) {
   const algoliaIndex = algolia.initIndex(config.algoliaIndexName!);
   const algoliaPtIndex = algolia.initIndex(config.algoliaPtIndexName!);
 
-  const enAlgoliaIndexer = indexer(
-    // The first parameter maps a Sanity document type to its respective Algolia
-    // search index. In this example both `post` and `article` Sanity types live
-    // in the same Algolia index. Optionally you can also customize how the
-    // document is fetched from Sanity by specifying a GROQ projection.
-    //
-    // In this example we fetch the plain text from Portable Text rich text
-    // content via the pt::text function.
-    //
-    // _id and other system fields are handled automatically.
+  const enAlgoliaIndexer = initSanityAlgoliaIndexer("en", algoliaIndex);
+  const ptAlgoliaIndexer = initSanityAlgoliaIndexer("pt", algoliaPtIndex);
+
+  const enIndexTask = client.fetch(query, { types }).then((ids) => {
+    console.info("INFO: Indexing english articles...");
+    enAlgoliaIndexer.webhookSync(client, {
+      ids: { created: ids, updated: [], deleted: [] },
+    });
+  });
+
+  const ptIndexTask = client.fetch(queryPt, { types }).then((ids) => {
+    console.info("INFO: Indexing portuguese articles...");
+    ptAlgoliaIndexer.webhookSync(client, {
+      ids: { created: ids, updated: [], deleted: [] },
+    });
+  });
+
+  await Promise.all([enIndexTask, ptIndexTask]).catch((err) => {
+    console.error("ERROR: Something went wrong", err);
+    return new Response(
+      JSON.stringify({
+        message: "Something went wrong",
+        details: err,
+      }),
+      { status: 500 }
+    );
+  });
+
+  return new Response(
+    JSON.stringify({
+      message: "Success",
+    }),
+    { status: 200 }
+  );
+}
+
+/**
+ * Initializes the Sanity Algolia index.
+ *
+ * @param language - The language of the index.
+ * @param algoliaIndexName - The name of the Algolia index.
+ * @returns The indexer function.
+ */
+function initSanityAlgoliaIndexer(language: string, algoliaIndexName: any) {
+  return indexer(
     {
       post: {
-        index: algoliaIndex,
+        index: algoliaIndexName,
         projection: `{
           title,
           summary,
@@ -206,10 +201,6 @@ export async function GET(req: NextRequest) {
         }`,
       },
     },
-
-    // The second parameter is a function that maps from a fetched Sanity document
-    // to an Algolia Record. Here you can do further mutations to the data before
-    // it is sent to Algolia.
     (document: SanityDocumentStub) => {
       switch (document._type) {
         case "post":
@@ -224,61 +215,32 @@ export async function GET(req: NextRequest) {
       }
     }
   );
+}
 
-  const ptAlgoliaIndexer = indexer(
-    // The first parameter maps a Sanity document type to its respective Algolia
-    // search index. In this example both `post` and `article` Sanity types live
-    // in the same Algolia index. Optionally you can also customize how the
-    // document is fetched from Sanity by specifying a GROQ projection.
-    //
-    // In this example we fetch the plain text from Portable Text rich text
-    // content via the pt::text function.
-    //
-    // _id and other system fields are handled automatically.
-    {
-      post: {
-        index: algoliaPtIndex,
-        projection: `{
-          title,
-          "summary": pt::text(summary),
-          "slug": slug.current,
-          "body": pt::text(body)
-        }`,
-      },
-    },
-
-    // The second parameter is a function that maps from a fetched Sanity document
-    // to an Algolia Record. Here you can do further mutations to the data before
-    // it is sent to Algolia.
-    (document: SanityDocumentStub) => {
-      console.log(document);
-      return {
-        ...document,
-        ObjectID: document._id,
-      };
-    }
-  );
-
-  await sanity.fetch(query, { types }).then((ids) => {
-    console.log("Indexing english articles...");
-    enAlgoliaIndexer
-      .webhookSync(sanity, {
-        ids: { created: ids, updated: [], deleted: [] },
-      })
+/**
+ * Syncs the Algolia index with the Sanity documents.
+ *
+ * @param indexed - The indexer function.
+ * @param client - The Sanity client.
+ * @param body - The webhook body.
+ * @returns A response object.
+ */
+async function synchAlgoliaIndex(indexed: any, client: SanityClient, body: WebhookBody) {
+  await indexed.webhookSync(client, body).then(() => {
+    console.info("Webhook synced successfully!");
+    return new Response(
+      JSON.stringify({
+        message: "Success",
+      }),
+      { status: 200 }
+    );
+  }).catch((err: any) => {
+    return new Response(
+      JSON.stringify({
+        message: "Something went wrong",
+        details: err,
+      }),
+      { status: 500 }
+    );
   });
-
-  await sanity.fetch(queryPt, { types }).then((ids) => {
-    console.log("Indexing portuguese articles...");
-    ptAlgoliaIndexer
-      .webhookSync(sanity, {
-        ids: { created: ids, updated: [], deleted: [] },
-      })
-  });
-
-  return new Response(
-    JSON.stringify({
-      message: "Success",
-    }),
-    { status: 200 }
-  );
 }
