@@ -11,7 +11,7 @@ export default function MainImg(img: any) {
 	return (
 		<figure className="flex flex-col justify-center">
 			<Image
-				className="prose prose-xl w-full rounded-3xl object-cover md:aspect-[2/1] mx-8 mb-0"
+				className="prose prose-2xl w-full rounded-3xl shadow-xl dark:shadow-zinc-800 object-cover md:aspect-[2/1] mx-0 mb-0"
 				src={builder.image(img.img).width(imgWidth).height(imgHeight).url()}
 				width={imgWidth}
 				height={imgHeight}

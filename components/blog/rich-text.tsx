@@ -102,7 +102,7 @@ export const RichTextComponents = {
       return (
         <figure className="flex flex-col justify-center">
           <Image
-            className="prose prose-xl w-full rounded-3xl object-cover md:aspect-[2/1] mx-8 mb-0"
+            className="prose prose-xl w-full rounded-xl object-cover md:aspect-[2/1] mx-0 mb-0"
             src={builder.image(value).width(imgWidth).height(imgHeight).url()}
             width={imgWidth}
             height={imgHeight}
