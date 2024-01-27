@@ -1,8 +1,12 @@
 import { defineField, defineType } from "sanity";
 
+const config = {
+    defaultAdslot: process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_SLOT_ID!
+}
+
 export default defineType({
     name: 'ads',
-    title: 'Ads',
+    title: 'Google Adsense',
     type: 'object',
     description: 'Allows you to add Google Adsense ads to your content',
     fields: [
@@ -10,40 +14,11 @@ export default defineType({
             type: 'string',
             name: 'adsenseSlot',
             title: 'Adsense Slot',
+            description: 'The slot ID of the ad you want to display',
+            initialValue: config.defaultAdslot,
             validation(rule) {
                 return rule.required().error('You have to fill out the adsense slot ID');
             }
-        }),
-        defineField({
-            type: 'string',
-            name: 'adsenseLayout',
-            title: 'Ad Layout',
-            options: {
-                list: [
-                    { title: 'In Article', value: 'in-article' },
-                    { title: 'In Feed', value: 'in-feed' },
-                    { title: 'Auto', value: 'auto' },
-                ],
-            },
-        }),
-        defineField({
-            type: 'string',
-            name: 'adsenseFormat',
-            title: 'Ad Format',
-            options: {
-                list: [
-                    { title: 'Responsive', value: 'responsive' },
-                    { title: 'Fixed', value: 'fixed' },
-                ],
-            },
-        }),
-        defineField({
-            type: 'string',
-            name: 'adsenseClient',
-            title: 'Adsense Client',
-            validation(rule) {
-                return rule.required().error('You have to fill out the adsense client ID');
-            },
         }),
     ],
 })

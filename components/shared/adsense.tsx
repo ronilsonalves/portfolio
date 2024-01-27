@@ -1,82 +1,60 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { usePathname } from "next/navigation";
 
 declare global {
   interface Window {
     adsbygoogle?: any | any[];
   }
 }
-const config = {
-  client: process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID,
-};
 
-interface AdsenseProps {
-  adsenseClient: string;
-  adsenseSlot: string;
-  adsenseFormat?: string;
-  adsenseLayout?: string;
-  widthResponsive?: boolean;
+interface AdSenseComponentProps {
+  adSlot?: string;
 }
 
-export const AdSenseComponent = () => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+const config = {
+  client: process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID,
+  defaultSlot: process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_SLOT_ID,
+};
 
+export const AdSenseComponent = (adSlot?: AdSenseComponentProps) => {
   useEffect(() => {
-    if (window) {
+    try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (err) {
+      console.error("Error loading AdSense Ad: ", err);
     }
-  }, [pathname, searchParams]);
+  }, []);
 
   return (
-    <>
+    <div className="shadow-sm rounded-sm">
       <ins
-        key={Math.random()}
-        className="adsbygoogle bg-white dark:bg-black"
-        style={{ display: "block", textAlign: "center" }}
+        className="adsbygoogle"
+        style={{ display: "block" }}
         data-ad-client={config.client}
-        data-ad-slot="8285876059"
+        data-ad-slot={adSlot?.adSlot || config.defaultSlot}
         data-ad-layout="in-article"
         data-ad-format="fluid"
         data-full-width-responsive="true"
       ></ins>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-// export default function Adsense({
-//   adsenseClient,
-//   adsenseSlot,
-//   adsenseLayout,
-//   adsenseFormat,
-// }: AdsenseProps) {
-//   useEffect(() => {
-//     if (window.adsbygoogle == null) {
-//       // const script = document.createElement("script");
-//       // script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
-//       // script.async = true;
-//       // script.defer = true;
-//       // document.body.appendChild(script);
-//       (window.adsbygoogle = window.adsbygoogle || []).push({});
-//     }
-//     (window.adsbygoogle = window.adsbygoogle || []).push({});
-//   }, []);
-//   return (
-//     <>
-//       <ins
-//         key={Math.random()}
-//         className="adsbygoogle"
-//         style={{ display: "block", textAlign: "center" }}
-//         data-ad-client={config.client}
-//         data-ad-slot={adsenseSlot}
-//         data-ad-layout="in-article"
-//         data-ad-format="fluid"
-//         data-full-width-responsive="true"
-//       ></ins>
-//     </>
-//   );
-// }
+export const AMPCustomElement = () => {
+  return (
+    <script
+      async
+      src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"
+    ></script>
+  );
+};
+
+export const AMPAutoAdsScript = () => {
+  return (
+    // @ts-ignore - amp-auto-ads is not a valid element
+    <amp-auto-ads type="adsense" data-ad-client={config.client}>
+      {/* @ts-ignore */}
+    </amp-auto-ads>
+  );
+};

@@ -12,7 +12,7 @@ import yaml from "highlight.js/lib/languages/yaml";
 
 import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
-import { AdSenseComponent } from "../shared/adsense";
+import { AdSenseComponent } from "@/components/shared/adsense";
 
 const builder = imageUrlBuilder(client);
 
@@ -33,7 +33,7 @@ export const RichTextComponents = {
   types: {
     code: ({ value }: any) => {
       return (
-        <pre className="mx-8 prose mt-0 mb-0 whitespace-break-spaces">
+        <pre className="mx-8 prose mt-0 mb-0 whitespace-break-spaces shadow-2xl">
           <code
             className={`language-${value.language} whitespace-break-spaces`}
             aria-hidden={true}
@@ -116,11 +116,7 @@ export const RichTextComponents = {
       );
     },
     ads: ({ value }: any) => {
-      return (
-        <div className="flex flex-col justify-center">
-          <AdSenseComponent />
-        </div>
-      );
+      return <AdSenseComponent adSlot={value.adsenseSlot}/>;
     },
   },
 };
