@@ -3,11 +3,11 @@
 import { useTheme } from "next-themes";
 import { SanityDocument } from "@sanity/client";
 import { PortableText } from "@portabletext/react";
-import { RichTextComponents } from "@/components/blog/rich-text";
-import Comments from "@/components/blog/comments";
-import BlogHeader from "@/components/blog/blog-header";
+import { RichTextComponents } from "@/components/blog/post/rich-text";
+import Comments from "@/components/blog/post/comments";
+import PostHeader from "@/components/blog/post/post-header";
 import { getPostCategories } from "@/lib/utils";
-import MainImg from "@/components/blog/main-img";
+import MainImg from "@/components/blog/post/main-img";
 
 export default function Post({
   post,
@@ -19,18 +19,16 @@ export default function Post({
   const { theme } = useTheme();
   return (
     <article className="mt-12 flex-grow px-4 md:px-16 lg:px-32">
-      <BlogHeader
+      <PostHeader
         publishedAt={post.publishedAt}
         author={post.author}
         title={post.title}
         locale={locale!}
         categories={getPostCategories(post)}
       />
-      {post?.mainImage ? (
-        <MainImg img={post.mainImage}/>
-      ) : null}
+      {post?.mainImage ? <MainImg img={post.mainImage} /> : null}
       {post?.body ? (
-        <div className="my-4 mb-4 prose prose-xl md:prose-2xl justify-center text-black dark:text-white">
+        <div className="prose prose-xl md:prose-2xl my-4 mb-4 justify-center text-black dark:text-white">
           <PortableText value={post.body} components={RichTextComponents} />
         </div>
       ) : null}

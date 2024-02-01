@@ -1,158 +1,160 @@
 {
-    "Navbar": {
-        "Home": {
-            "title": "Home",
-            "path": "/"
-        },
-        "About": {
-            "title": "About",
-            "path": "/about"
-        },
-        "Articles": {
-            "title": "Articles",
-            "path": "/articles"
-        },
-        "Privacy": {
-            "title": "Privacy",
-            "path": "/privacy"
-        },
-        "Projects": {
-            "title": "Projects",
-            "path": "/projects"
-        },
-        "Services": {
-            "title": "Services",
-            "path": "/services"
-        },
-        "Mobile": {
-            "title": "Navigation"
-        }
-    },
+  "Navbar": {
     "Home": {
-        "Hero": {
-            "Title": "Hello world ✋🏾,",
-            "Subtitle": "I'm Ronilson Alves",
-            "Description": "Astro photographer, amateur astronomer and also a Software Developer with 2+ years of experience in the development of web applications using Java, Spring Boot, Go lang, TypeScript and React."
-        },
-        "Articles": {
-            "Title": "Articles",
-            "Description": "Here you will find some of my articles published on Medium / The Pratical Dev.",
-            "Button": "See all articles"
-        }
+      "title": "Home",
+      "path": "/"
     },
-    "Articles":  {
-        "Card": {
-            "Read": "Read more"
-        },
-        "Load": "Load more articles"
+    "About": {
+      "title": "About",
+      "path": "/about"
     },
-    "Contact": {
-        "Title": "Let's talk?",
-        "Form": {
-            "Name": {
-                "Title": "Name",
-                "Subtitle": "What's your name?",
-                "Placeholder": "John Doe"
-            },
-            "Subject": {
-                "Title": "Subject",
-                "Subtitle": "Please, enter a subject. (Optional)",
-                "Placeholder": "Why you're reaching me out?"
-            },
-            "Email": {
-                "Title": "Email",
-                "Subtitle": "What's your email?",
-                "Placeholder": "john.doe@yourcompany.com"
-            },
-            "Message": {
-                "Title": "Message",
-                "Subtitle": "Please enter your message.",
-                "Placeholder": "Why you're reaching me out?"
-            },
-            "Button": "Send message",
-            "Validation": {
-                "Name": {
-                    "Required": "Please, enter your name.",
-                    "MinLength": "Please, enter a valid name."
-                },
-                "Subject": {
-                    "Required": "Please, enter a subject.",
-                    "MinLength": "Please, enter a valid subject."
-                },
-                "Email": {
-                    "Required": "Please, enter your email.",
-                    "Invalid": "Please, enter a valid email."
-                },
-                "Message": {
-                    "Required": "Please, enter your message.",
-                    "MinLength": "Your message must be at least 60 characters."
-                }
-            }
-        },
-        "Messages": {
-            "Success": {
-                "Title": "Message sent successfully!",
-                "Description": "Thank you for reaching me out. I'll reply you as soon as possible."
-            },
-            "Error": {
-                "Title": "Error sending message!",
-                "Description": "Sorry, an error occurred while sending your message. Please, try again later."
-            }
-        }
+    "Articles": {
+      "title": "Articles",
+      "path": "/articles"
     },
-    "Socials": {
-        "Title": "Follow me on social media",
-        "Description": "Here you can find my social media profiles.",
-        "Github": {
-            "Title": "My Github profile",
-            "Href": "https://github.com/ronilsonalves"
-        },
-        "LinkedIn": {
-            "Title": "My Linkedin profile",
-            "Href": "https://www.linkedin.com/in/ronilsonalves/"
-        },
-        "TikTok": {
-            "Title": "My TikTok profile",
-            "Href": "https://www.tiktok.com/@ronilsonalves"
-        },
-        "Twitter": {
-            "Title": "My Twitter profile",
-            "Href": "https://twitter.com/ronilsonalves"
-        },
-        "YouTube": {
-            "Title": "My YouTube channel",
-            "Href": "https://www.youtube.com/@ronilsonalves"
-        }
+    "Privacy": {
+      "title": "Privacy",
+      "path": "/privacy"
     },
-    "Footer": {
-        "Name": {
-            "title": "Ronilson Alves"
-        },
-        "Description": {
-            "title": "Astro photographer, amateur astronomer and also a software developer."
-        },
-        "Copyright": {
-            "text": "All rights reserved."
-        }
+    "Projects": {
+      "title": "Projects",
+      "path": "/projects"
     },
-    "Errors": {
-        "404": {
-            "title": "Page not found",
-            "description": "Sorry, we couldn't find the page you were looking for.",
-            "button": "Go back home"
-        },
-        "500": {
-            "title": "Internal server error",
-            "description": "An error occurred on the server.",
-            "button": "Go back home"
-        }
+    "Services": {
+      "title": "Services",
+      "path": "/services"
     },
-    "Metadata": {
-        "Title": "Ronilson Alves – Software Developer",
-        "Description": "Astro photographer, amateur astronomer and also a Software Developer with 2+ years of experience in the development of web applications using Java, Spring Boot, Go lang, TypeScript and React.",
-        "Home": {
-            "title": "Ronilson Alves - Software Developer",
-            "description": "Astro photographer, amateur astronomer and also a Software Developer with 2+ years of experience in the development of web applications using Java, Spring Boot, Go lang, TypeScript and React."
-        }
+    "Mobile": {
+      "title": "Navigation"
     }
+  },
+  "Home": {
+    "Hero": {
+      "Title": "Hello world ✋🏾,",
+      "Subtitle": "I'm Ronilson Alves",
+      "Description": "Astro photographer, amateur astronomer and also a Software Developer with 2+ years of experience in the development of web applications using Java, Spring Boot, Go lang, TypeScript and React."
+    },
+    "Articles": {
+      "Title": "Articles",
+      "Description": "Here you will find some of my articles published on Medium / The Pratical Dev.",
+      "Button": "See all articles"
+    }
+  },
+  "Articles": {
+    "Card": {
+      "Read": "Read more"
+    },
+    "Load": "Load more articles",
+    "Empty": "No articles found.",
+    "Filters": "Categories"
+  },
+  "Contact": {
+    "Title": "Let's talk?",
+    "Form": {
+      "Name": {
+        "Title": "Name",
+        "Subtitle": "What's your name?",
+        "Placeholder": "John Doe"
+      },
+      "Subject": {
+        "Title": "Subject",
+        "Subtitle": "Please, enter a subject. (Optional)",
+        "Placeholder": "Why you're reaching me out?"
+      },
+      "Email": {
+        "Title": "Email",
+        "Subtitle": "What's your email?",
+        "Placeholder": "john.doe@yourcompany.com"
+      },
+      "Message": {
+        "Title": "Message",
+        "Subtitle": "Please enter your message.",
+        "Placeholder": "Why you're reaching me out?"
+      },
+      "Button": "Send message",
+      "Validation": {
+        "Name": {
+          "Required": "Please, enter your name.",
+          "MinLength": "Please, enter a valid name."
+        },
+        "Subject": {
+          "Required": "Please, enter a subject.",
+          "MinLength": "Please, enter a valid subject."
+        },
+        "Email": {
+          "Required": "Please, enter your email.",
+          "Invalid": "Please, enter a valid email."
+        },
+        "Message": {
+          "Required": "Please, enter your message.",
+          "MinLength": "Your message must be at least 60 characters."
+        }
+      }
+    },
+    "Messages": {
+      "Success": {
+        "Title": "Message sent successfully!",
+        "Description": "Thank you for reaching me out. I'll reply you as soon as possible."
+      },
+      "Error": {
+        "Title": "Error sending message!",
+        "Description": "Sorry, an error occurred while sending your message. Please, try again later."
+      }
+    }
+  },
+  "Socials": {
+    "Title": "Follow me on social media",
+    "Description": "Here you can find my social media profiles.",
+    "Github": {
+      "Title": "My Github profile",
+      "Href": "https://github.com/ronilsonalves"
+    },
+    "LinkedIn": {
+      "Title": "My Linkedin profile",
+      "Href": "https://www.linkedin.com/in/ronilsonalves/"
+    },
+    "TikTok": {
+      "Title": "My TikTok profile",
+      "Href": "https://www.tiktok.com/@ronilsonalves"
+    },
+    "Twitter": {
+      "Title": "My Twitter profile",
+      "Href": "https://twitter.com/ronilsonalves"
+    },
+    "YouTube": {
+      "Title": "My YouTube channel",
+      "Href": "https://www.youtube.com/@ronilsonalves"
+    }
+  },
+  "Footer": {
+    "Name": {
+      "title": "Ronilson Alves"
+    },
+    "Description": {
+      "title": "Astro photographer, amateur astronomer and also a software developer."
+    },
+    "Copyright": {
+      "text": "All rights reserved."
+    }
+  },
+  "Errors": {
+    "404": {
+      "title": "Page not found",
+      "description": "Sorry, we couldn't find the page you were looking for.",
+      "button": "Go back home"
+    },
+    "500": {
+      "title": "Internal server error",
+      "description": "An error occurred on the server.",
+      "button": "Go back home"
+    }
+  },
+  "Metadata": {
+    "Title": "Ronilson Alves – Software Developer",
+    "Description": "Astro photographer, amateur astronomer and also a Software Developer with 2+ years of experience in the development of web applications using Java, Spring Boot, Go lang, TypeScript and React.",
+    "Home": {
+      "title": "Ronilson Alves - Software Developer",
+      "description": "Astro photographer, amateur astronomer and also a Software Developer with 2+ years of experience in the development of web applications using Java, Spring Boot, Go lang, TypeScript and React."
+    }
+  }
 }

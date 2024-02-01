@@ -1,10 +1,13 @@
 import { toPlainText } from "@portabletext/react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getTranslations} from "next-intl/server";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { SanityDocument } from "next-sanity";
 import Page from "@/components/institutional/page";
-import { allCategoriesQuery, pageWithTranslationsQuery, postsByLangQuery } from "@/sanity/lib/queries";
+import {
+  pageWithTranslationsQuery,
+  postsByLangQuery,
+} from "@/sanity/lib/queries";
 import { generateStaticSlugs, sanityFetch } from "@/sanity/lib/fetch";
 
 type Props = {
@@ -12,13 +15,14 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const t = await getTranslations("Metadata")
+  const locale = params.locale;
+  const t = await getTranslations({ locale, namespace: "Metadata" });
   const loadedPage = await loadPage(params.slug, params.locale);
   if (!loadedPage) {
     notFound();
   }
   const languages = loadedPage?._translations?.filter(
-    (translation: any) => translation !== undefined
+    (translation: any) => translation !== undefined,
   );
 
   const en = languages.filter((language: any) => language?.language === "en");
@@ -26,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     metadataBase: new URL(
-      process.env.NEXT_PUBLIC_SITE_URL || "https://www.ronilsonalves.com"
+      process.env.NEXT_PUBLIC_SITE_URL || "https://www.ronilsonalves.com",
     ),
     alternates: {
       canonical:
@@ -58,7 +62,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export function generateStaticParams() {
-  return generateStaticSlugs("page");
+  const staticSlugs: String[] = [];
+  generateStaticSlugs("page").then((slugs) => {
+    staticSlugs.push(...slugs);
+  });
+  generateStaticSlugs("post").then((slugs) => {
+    staticSlugs.push(...slugs);
+  });
+  return staticSlugs;
 }
 
 async function loadPage(slug: string, locale: string) {
@@ -75,14 +86,8 @@ async function loadPosts(language: string) {
   });
 }
 
-async function loadCategories(language: string) {
-  return await sanityFetch<SanityDocument[]>({
-    query: allCategoriesQuery,
-    params: { language },
-  })
-}
-
 export default async function PageSlugRoute({ params }: Props) {
+  unstable_setRequestLocale(params.locale);
   const page = await loadPage(params.slug, params.locale);
   if (!page) {
     notFound();
@@ -91,8 +96,7 @@ export default async function PageSlugRoute({ params }: Props) {
     case "artigos":
     case "articles":
       const posts = await loadPosts(params.locale);
-      const categories = await loadCategories(params.locale);
-      return <Page page={page} posts={posts} locale={params.locale} categories={categories}/>;
+      return <Page page={page} posts={posts} locale={params.locale} />;
     default:
       return <Page page={page} />;
   }

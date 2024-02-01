@@ -1,14 +1,18 @@
 import { NextRequest } from "next/server";
 import algoliasearch from "algoliasearch";
-import { createClient, type SanityDocumentStub, type SanityClient } from "@sanity/client";
+import {
+  createClient,
+  type SanityDocumentStub,
+  type SanityClient,
+} from "@sanity/client";
 import indexer from "sanity-algolia";
 import { WebhookBody } from "sanity-algolia/dist/types";
 
 const config = {
   algoliaAdminApiKey: process.env.ALGOLIA_ADMIN_API_KEY,
-  algoliaApplicationId: process.env.ALGOLIA_APP_ID,
-  algoliaPtIndexName: process.env.ALGOLIA_PT_INDEX_NAME,
-  algoliaIndexName: process.env.ALGOLIA_INDEX_NAME,
+  algoliaApplicationId: process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+  algoliaPtIndexName: process.env.NEXT_PUBLIC_ALGOLIA_PT_INDEX_NAME,
+  algoliaIndexName: process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME,
   sanityProjectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   sanityDataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
   sanityReadToken: process.env.SANITY_API_TOKEN,
@@ -21,7 +25,7 @@ const queryPt = `*[_type == "post" && defined(slug.current) &&!(_id in path("dra
 
 const algolia = algoliasearch(
   config.algoliaApplicationId!,
-  config.algoliaAdminApiKey!
+  config.algoliaAdminApiKey!,
 );
 
 const client = createClient({
@@ -45,7 +49,7 @@ export async function POST(req: NextRequest) {
         message: "Bad request",
         details: "Content-type must be application/json",
       }),
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -57,7 +61,7 @@ export async function POST(req: NextRequest) {
         message: "Unauthorized",
         details: "Invalid webhook token",
       }),
-      { status: 401 }
+      { status: 401 },
     );
   }
 
@@ -70,7 +74,7 @@ export async function POST(req: NextRequest) {
         message: "Bad request",
         details: "Invalid or missing language header",
       }),
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -101,16 +105,24 @@ export async function POST(req: NextRequest) {
         message: "Bad request",
         details: "Invalid webhook body",
       }),
-      { status: 400 }
+      { status: 400 },
     );
   }
 
   switch (req.headers.get("Language")) {
     case "en":
-      await synchAlgoliaIndex(sanityEn, client, parsedWebhookBody as WebhookBody);
+      await synchAlgoliaIndex(
+        sanityEn,
+        client,
+        parsedWebhookBody as WebhookBody,
+      );
       break;
     case "pt":
-      await synchAlgoliaIndex(sanityPt, client, parsedWebhookBody as WebhookBody);
+      await synchAlgoliaIndex(
+        sanityPt,
+        client,
+        parsedWebhookBody as WebhookBody,
+      );
       break;
     default:
       return new Response(
@@ -118,7 +130,7 @@ export async function POST(req: NextRequest) {
           message: "Bad request",
           details: "Invalid or missing language header",
         }),
-        { status: 400 }
+        { status: 400 },
       );
   }
 
@@ -128,7 +140,7 @@ export async function POST(req: NextRequest) {
     JSON.stringify({
       message: "Success",
     }),
-    { status: 200 }
+    { status: 200 },
   );
 }
 
@@ -145,7 +157,7 @@ export async function GET(req: NextRequest) {
       JSON.stringify({
         message: "Unauthorized",
       }),
-      { status: 401 }
+      { status: 401 },
     );
   }
 
@@ -176,16 +188,15 @@ export async function GET(req: NextRequest) {
         message: "Something went wrong",
         details: err,
       }),
-      { status: 500 }
+      { status: 500 },
     );
   });
 
-  
   return new Response(
     JSON.stringify({
       message: "Success",
     }),
-    { status: 200 }
+    { status: 200 },
   );
 }
 
@@ -205,23 +216,28 @@ function initSanityAlgoliaIndexer(language: string, algoliaIndexName: any) {
           title,
           summary,
           "slug": slug.current,
-          "body": pt::text(body)
+          "body": pt::text(body),
+          publishedAt,
+          "categories": categories[]->title[@._key == "${language}"].value,
         }`,
       },
     },
     (document: SanityDocumentStub) => {
       switch (document._type) {
         case "post":
+          console.log("INFO: Post...: ", document.categories);
           return {
             title: document.title,
             summary: document.summary,
             slug: document.slug,
             body: document.body,
+            publishedAt: document.publishedAt,
+            categories: document.categories,
           };
         default:
           return document;
       }
-    }
+    },
   );
 }
 
@@ -233,22 +249,29 @@ function initSanityAlgoliaIndexer(language: string, algoliaIndexName: any) {
  * @param body - The webhook body.
  * @returns A response object.
  */
-async function synchAlgoliaIndex(indexed: any, client: SanityClient, body: WebhookBody) {
-  return indexed.webhookSync(client, body).then(() => {
-    console.info("Webhook synced successfully!");
-    return new Response(
-      JSON.stringify({
-        message: "Success",
-      }),
-      { status: 200 }
-    );
-  }).catch((err: any) => {
-    return new Response(
-      JSON.stringify({
-        message: "Something went wrong",
-        details: err,
-      }),
-      { status: 500 }
-    );
-  });
+async function synchAlgoliaIndex(
+  indexed: any,
+  client: SanityClient,
+  body: WebhookBody,
+) {
+  return indexed
+    .webhookSync(client, body)
+    .then(() => {
+      console.info("Webhook synced successfully!");
+      return new Response(
+        JSON.stringify({
+          message: "Success",
+        }),
+        { status: 200 },
+      );
+    })
+    .catch((err: any) => {
+      return new Response(
+        JSON.stringify({
+          message: "Something went wrong",
+          details: err,
+        }),
+        { status: 500 },
+      );
+    });
 }

@@ -1,19 +1,19 @@
 import Image from "next/image";
-import {client} from "@/sanity/lib/client";
+import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { cn } from "@/lib/utils";
 import { formatDate } from "@/lib/formatDate";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 const builder = imageUrlBuilder(client);
 
-export default function BlogHeader({
+export default function PostHeader({
   author,
   categories,
   className,
   locale,
   publishedAt,
-  title
+  title,
 }: {
   author: any;
   categories: string[];
@@ -23,8 +23,8 @@ export default function BlogHeader({
   title: string;
 }) {
   return (
-    <header className={cn("flex flex-col mb-12 mx-4", className)}>
-      <h1 className="text-3xl font-extrabold md:text-5xl whitespace-break-spaces">
+    <header className={cn("mx-4 mb-12 flex flex-col", className)}>
+      <h1 className="whitespace-break-spaces text-3xl font-extrabold md:text-5xl">
         {title}
       </h1>
       <time
@@ -37,16 +37,16 @@ export default function BlogHeader({
         </span>
       </time>
       {/* TODO: Add action to these buttons to redirect user to posts by these respective categories */}
-      <div className="flex items-center gap-1 mt-4">
+      <div className="mt-4 flex items-center gap-1">
         {categories?.map((category) => (
           <Button key={category}>{category}</Button>
         ))}
       </div>
       <span className="order-last flex items-center text-base text-black dark:text-white">
         {author ? (
-          <span className="flex items-center gap-1 mt-4">
+          <span className="mt-4 flex items-center gap-1">
             <Image
-              className="rounded-full mt-1 mb-0"
+              className="mb-0 mt-1 rounded-full"
               src={builder.image(author.image).width(48).height(48).url()}
               width={48}
               height={48}
@@ -54,7 +54,11 @@ export default function BlogHeader({
             />
             <span className="ml-2">{author.name}</span>
             <span className="ml-2 text-xs ">●</span>
-            <span className="ml-2">{author.bio[0]._key === locale ? author.bio[0].value : author.bio[1].value}</span>
+            <span className="ml-2">
+              {author.bio[0]._key === locale
+                ? author.bio[0].value
+                : author.bio[1].value}
+            </span>
           </span>
         ) : null}
       </span>
