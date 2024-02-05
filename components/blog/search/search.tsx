@@ -59,13 +59,15 @@ export default function Search({ language }: SearchProps) {
             showPrevious={false}
           />
         </div>
-        <div className="sticky top-12 z-10 col-span-3 space-x-0">
-          <h3 className="mb-2 text-xl font-semibold">{t("Filters")}</h3>
+        <div className="col-span-3 space-x-0">
+          <h3 className="mb-2 text-xl font-semibold sm:sticky sm:top-20">
+            {t("Filters")}
+          </h3>
           <RefinementList
             attribute="categories"
             title="Categories"
             classNames={{
-              root: "space-y-4",
+              root: "space-y-4 sm:sticky sm:top-28",
               list: "space-y-2",
               item: "flex items-center",
               label: "text-sm",
