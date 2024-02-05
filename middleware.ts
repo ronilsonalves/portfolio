@@ -17,6 +17,10 @@ export default createMiddleware({
       en: "/articles/[...slug]",
       pt: "/artigos/[...slug]",
     },
+    "/projects/[...slug]": {
+      en: "/projects/[...slug]",
+      pt: "/projetos/[...slug]",
+    },
   },
 });
 export const config = {

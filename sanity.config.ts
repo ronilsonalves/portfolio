@@ -27,21 +27,21 @@ export default defineConfig({
           name: "bash",
           loader: () =>
             import("@codemirror/legacy-modes/mode/shell").then(({ shell }) =>
-              StreamLanguage.define(shell)
+              StreamLanguage.define(shell),
             ),
         },
         {
           name: "golang",
           loader: () =>
             import("@codemirror/legacy-modes/mode/go").then(({ go }) =>
-              StreamLanguage.define(go)
+              StreamLanguage.define(go),
             ),
         },
         {
           name: "javascript",
           loader: () =>
             import("@codemirror/lang-javascript").then(({ javascript }) =>
-              javascript()
+              javascript(),
             ),
         },
         {
@@ -57,7 +57,7 @@ export default defineConfig({
           name: "yaml",
           loader: () =>
             import("@codemirror/legacy-modes/mode/yaml").then(({ yaml }) =>
-              StreamLanguage.define(yaml)
+              StreamLanguage.define(yaml),
             ),
         },
       ],
@@ -67,7 +67,7 @@ export default defineConfig({
         { id: "en", title: "English" },
         { id: "pt", title: "Português" },
       ],
-      schemaTypes: ["post", "page"],
+      schemaTypes: ["post", "page", "project"],
       languageField: "language",
     }),
     internationalizedArray({

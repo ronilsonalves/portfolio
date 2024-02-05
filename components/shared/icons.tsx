@@ -1,5 +1,23 @@
 import "@/styles/globals.css";
 import { cn } from "@/lib/utils";
+
+export function ArrowUpCircleIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="h-6 w-6"
+    >
+      <path
+        fillRule="evenodd"
+        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm.53 5.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72v5.69a.75.75 0 0 0 1.5 0v-5.69l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+}
+
 export function ChevronDownIcon() {
   return (
     <svg
@@ -8,12 +26,31 @@ export function ChevronDownIcon() {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-3 h-3"
+      className="h-3 w-3"
     >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+      />
+    </svg>
+  );
+}
+
+export function ChevronLeftIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="h-6 w-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15.75 19.5 8.25 12l7.5-7.5"
       />
     </svg>
   );
@@ -26,7 +63,7 @@ export function ChevronRightIcon() {
       fill="none"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-8 h-6"
+      className="h-6 w-8"
     >
       <path
         d="M6.75 5.75 9.25 8l-2.5 2.25"
@@ -46,7 +83,7 @@ export function HomeIcon() {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-5 h-6"
+      className="h-6 w-5"
     >
       <path
         strokeLinecap="round"
@@ -65,7 +102,7 @@ export function MoonIcon({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={className || "w-6 h-6"}
+      className={className || "h-6 w-6"}
     >
       <path
         strokeLinecap="round"
@@ -76,7 +113,7 @@ export function MoonIcon({ className }: { className?: string }) {
   );
 }
 
-export function SearchIcon({className}: { className?: string}) {
+export function SearchIcon({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -84,17 +121,21 @@ export function SearchIcon({className}: { className?: string}) {
       fill="none"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={cn("fill-current hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200",className)}>
+      className={cn(
+        "fill-current transition-colors duration-200 hover:text-gray-600 dark:hover:text-gray-300",
+        className,
+      )}
+    >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-            d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z"
+        d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z"
       />
     </svg>
-  )
+  );
 }
 
-export function SunIcon({className}: { className?: string }) {
+export function SunIcon({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +143,7 @@ export function SunIcon({className}: { className?: string }) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={className || "w-6 h-6"}
+      className={className || "h-6 w-6"}
     >
       <path
         strokeLinecap="round"

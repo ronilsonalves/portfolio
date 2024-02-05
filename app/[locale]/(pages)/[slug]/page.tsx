@@ -7,6 +7,7 @@ import Page from "@/components/institutional/page";
 import {
   pageWithTranslationsQuery,
   postsByLangQuery,
+  projectsQuery,
 } from "@/sanity/lib/queries";
 import { generateStaticSlugs, sanityFetch } from "@/sanity/lib/fetch";
 
@@ -69,6 +70,9 @@ export function generateStaticParams() {
   generateStaticSlugs("post").then((slugs) => {
     staticSlugs.push(...slugs);
   });
+  generateStaticSlugs("project").then((slugs) => {
+    staticSlugs.push(...slugs);
+  });
   return staticSlugs;
 }
 
@@ -86,6 +90,13 @@ async function loadPosts(language: string) {
   });
 }
 
+async function loadProjects(language: string) {
+  return await sanityFetch<SanityDocument[]>({
+    query: projectsQuery,
+    params: { language },
+  });
+}
+
 export default async function PageSlugRoute({ params }: Props) {
   unstable_setRequestLocale(params.locale);
   const page = await loadPage(params.slug, params.locale);
@@ -97,6 +108,12 @@ export default async function PageSlugRoute({ params }: Props) {
     case "articles":
       const posts = await loadPosts(params.locale);
       return <Page page={page} posts={posts} locale={params.locale} />;
+    case "projects":
+    case "projetos":
+      const projects = await loadProjects(params.locale);
+      return <Page page={page} projects={projects} locale={params.locale} />;
+    case "servicos":
+    case "services":
     default:
       return <Page page={page} />;
   }

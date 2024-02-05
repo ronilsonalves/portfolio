@@ -102,6 +102,17 @@
       }
     }
   },
+  "Projects": {
+    "Details": "Ver detalhes",
+    "Client": "Cliente",
+    "Duration": "Duração",
+    "BackTo": "Voltar para projetos"
+  },
+  "Services": {
+    "OrText": "Ou",
+    "Schedule": "Agende uma reunião",
+    "Description": "Se preferir, você pode agendar uma reunião comigo para discutirmos sobre suas necessidades e como posso te ajudar."
+  },
   "Socials": {
     "Title": "Encontre-me nas redes sociais",
     "Description": "Você pode me encontrar nas seguintes redes sociais:",
@@ -155,6 +166,9 @@
     "Home": {
       "title": "Ronilson Alves - Desenvolvedor de Software",
       "description": "Astrofotografo, astrônomo amador e também desenvolvedor de software com mais de 2 anos de experiência no desenvolvimento de aplicações web usando Java, Spring, Go lang, TypeScript e React."
+    },
+    "Projects": {
+      "title": "– Projetos –"
     }
   }
 }

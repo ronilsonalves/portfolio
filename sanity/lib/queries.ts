@@ -53,7 +53,7 @@ export const postPathsQuery = groq`*[_type == "post" && defined(slug.current)][]
   }`;
 
 // Get the author
-export const authorQuery = groq`*[_type == "author" && slug.current == $slug][0]{ 
+export const authorQuery = groq`*[_type == "author" && slug.current == $slug][0]{
     name, image
   }`;
 
@@ -72,6 +72,39 @@ export const pageWithTranslationsQuery = groq`*[_type == "page" && slug.current 
     language
   }
 }`;
+
+export const projectsQuery = groq`*[_type == "project" && language == $language] | order(duration.start desc)[]{
+  _id,
+  _type,
+  _createdAt,
+  client,
+  coverImage,
+  description,
+  duration,
+  title,
+  overview,
+  slug,
+  tags,
+}`;
+
+export const projectQuery = groq`*[_type == "project" && slug.current == $slug][0]{
+  _id,
+  _type,
+  _createdAt,
+  client,
+  coverImage,
+  description,
+  duration,
+  title,
+  overview,
+  slug,
+  tags,
+  language,
+  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+    slug,
+    language
+  }
+  }`;
 
 export const getPagesSlugByLanguageQuery = groq`*[_type == "page" && language == $language][]{
   "slug": slug.current
