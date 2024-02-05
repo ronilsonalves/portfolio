@@ -3,7 +3,7 @@ import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { cn } from "@/lib/utils";
 import { formatDate } from "@/lib/formatDate";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 const builder = imageUrlBuilder(client);
 
@@ -36,10 +36,11 @@ export default function PostHeader({
           {formatDate(new Date(publishedAt), locale)}
         </span>
       </time>
-      {/* TODO: Add action to these buttons to redirect user to posts by these respective categories */}
       <div className="mt-4 flex items-center gap-1">
         {categories?.map((category) => (
-          <Button key={category}>{category}</Button>
+          <Badge key={category} title={category}>
+            {category}
+          </Badge>
         ))}
       </div>
       <span className="order-last flex items-center text-base text-black dark:text-white">

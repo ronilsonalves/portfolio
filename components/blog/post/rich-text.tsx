@@ -1,5 +1,6 @@
 import Image from "next/image";
 import hljs from "highlight.js";
+import { lazy } from "react";
 import "highlight.js/styles/atom-one-dark.css";
 import bash from "highlight.js/lib/languages/bash";
 import golang from "highlight.js/lib/languages/go";
@@ -12,7 +13,11 @@ import yaml from "highlight.js/lib/languages/yaml";
 
 import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
-import { AdSenseComponent } from "@/components/shared/adsense";
+const AdSenseComponent = lazy(() =>
+  import("@/components/shared/adsense").then((mod) => ({
+    default: mod.AdSenseComponent,
+  })),
+);
 
 const builder = imageUrlBuilder(client);
 
@@ -33,7 +38,7 @@ export const RichTextComponents = {
   types: {
     code: ({ value }: any) => {
       return (
-        <pre className="mx-8 prose mt-0 mb-0 whitespace-break-spaces shadow-2xl">
+        <pre className="prose mx-8 mb-0 mt-0 whitespace-break-spaces shadow-2xl">
           <code
             className={`language-${value.language} whitespace-break-spaces`}
             aria-hidden={true}
@@ -42,7 +47,7 @@ export const RichTextComponents = {
               __html: hljs.highlight(
                 value.code,
                 { language: value.language },
-                true
+                true,
               ).value,
             }}
           ></code>
@@ -53,38 +58,38 @@ export const RichTextComponents = {
       switch (value.style) {
         case "h1":
           return (
-            <h1 className="ml-8 prose md:prose-xl text-black dark:text-white">
+            <h1 className="prose md:prose-xl ml-8 text-black dark:text-white">
               {value.children[0].text}
             </h1>
           );
         case "h2":
           return (
-            <h2 className="ml-8 prose md:prose-xl text-black dark:text-white">
+            <h2 className="prose md:prose-xl ml-8 text-black dark:text-white">
               {value.children[0].text}
             </h2>
           );
         case "h3":
           return (
-            <h3 className="ml-8 prose md:prose-xl text-black dark:text-white">
+            <h3 className="prose md:prose-xl ml-8 text-black dark:text-white">
               {value.children[0].text}
             </h3>
           );
         case "h4":
           return (
-            <h4 className="ml-8 prose md:prose-xl text-black dark:text-white whitespace-pre-wrap">
+            <h4 className="prose md:prose-xl ml-8 whitespace-pre-wrap text-black dark:text-white">
               {value.children[0].text}
             </h4>
           );
         case "blockquote":
           return (
-            <blockquote className="border-l-4 border-gray-300 dark:border-gray-600 pl-4 ">
+            <blockquote className="border-l-4 border-gray-300 pl-4 dark:border-gray-600 ">
               {value.children[0].text}
             </blockquote>
           );
         case "normal":
         default:
           return (
-            <p className="ml-8 prose md:prose-xl text-black dark:text-white">
+            <p className="prose md:prose-xl ml-8 text-black dark:text-white">
               {value.children &&
                 value.children
                   .map((child: any) => {
@@ -102,7 +107,7 @@ export const RichTextComponents = {
       return (
         <figure className="flex flex-col justify-center">
           <Image
-            className="prose prose-xl w-full rounded-xl object-cover md:aspect-[2/1] mx-0 mb-0"
+            className="prose prose-xl mx-0 mb-0 w-full rounded-xl object-cover md:aspect-[2/1]"
             src={builder.image(value).width(imgWidth).height(imgHeight).url()}
             width={imgWidth}
             height={imgHeight}
@@ -116,7 +121,7 @@ export const RichTextComponents = {
       );
     },
     ads: ({ value }: any) => {
-      return <AdSenseComponent adSlot={value.adsenseSlot}/>;
+      return <AdSenseComponent adSlot={value.adsenseSlot} />;
     },
   },
 };
