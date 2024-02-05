@@ -64,19 +64,28 @@ export const RichTextComponents = {
           );
         case "h2":
           return (
-            <h2 className="prose md:prose-xl ml-8 text-black dark:text-white">
+            <h2
+              className="prose md:prose-xl ml-8 text-black dark:text-white"
+              id={value.children[0].text}
+            >
               {value.children[0].text}
             </h2>
           );
         case "h3":
           return (
-            <h3 className="prose md:prose-xl ml-8 text-black dark:text-white">
+            <h3
+              className="prose md:prose-xl ml-8 text-black dark:text-white"
+              id={value.children[0].text}
+            >
               {value.children[0].text}
             </h3>
           );
         case "h4":
           return (
-            <h4 className="prose md:prose-xl ml-8 whitespace-pre-wrap text-black dark:text-white">
+            <h4
+              className="prose md:prose-xl ml-8 whitespace-pre-wrap text-black dark:text-white"
+              id={value.children[0].text}
+            >
               {value.children[0].text}
             </h4>
           );

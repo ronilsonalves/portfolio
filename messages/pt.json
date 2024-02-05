@@ -46,7 +46,8 @@
     },
     "Load": "Carregar mais artigos",
     "Empty": "Nenhum artigo encontrado.",
-    "Filters": "Categorias"
+    "Filters": "Categorias",
+    "TableOfContents": "Tabela de Conteúdo"
   },
   "Contact": {
     "Title": "Vamos conversar?",

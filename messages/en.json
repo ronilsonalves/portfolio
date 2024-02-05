@@ -46,7 +46,8 @@
     },
     "Load": "Load more articles",
     "Empty": "No articles found.",
-    "Filters": "Categories"
+    "Filters": "Categories",
+    "TableOfContents": "Table of contents"
   },
   "Contact": {
     "Title": "Let's talk?",

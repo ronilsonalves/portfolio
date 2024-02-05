@@ -34,6 +34,7 @@ export const postQuery = groq`*[_type == "post" && slug.current == $slug][0]{
     body,
     "categories": categories[]->title,
     language,
+    "slug": slug.current,
     "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
     	slug,
     	language
