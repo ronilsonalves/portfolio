@@ -1,5 +1,5 @@
 import { SanityDocument } from "@sanity/client";
-import Post from "./components/post";
+import PostRenderer from "@/components/blog/post/page";
 import { postQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlForOpenGraphImage } from "@/sanity/lib/image";
@@ -85,5 +85,5 @@ export default async function ArticlePage({
     return notFound();
   }
 
-  return <Post post={post} locale={locale} />;
+  return <PostRenderer post={post} locale={locale} />;
 }
