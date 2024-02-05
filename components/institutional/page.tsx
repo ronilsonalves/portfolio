@@ -6,17 +6,20 @@ import { CustomPortableText } from "@/components/shared/custom-portable-text";
 import AboutBody from "@/components/institutional/about/body";
 import ArticleList from "@/components/blog/listing/articles-list";
 import ProjectsListing from "@/components/projects/listing";
+import ServiceListing from "@/components/services/listing";
 
 export default function Page({
   page,
   locale,
   posts,
   projects,
+  services,
 }: {
   page: SanityDocument;
   locale?: string;
   posts?: SanityDocument[];
   projects?: SanityDocument[];
+  services?: SanityDocument[];
 }) {
   return (
     <main className="justify-left mt-8 flex w-full flex-grow px-4 md:px-16 lg:px-32">
@@ -35,6 +38,9 @@ export default function Page({
         {/* Projects page body */}
         {projects ? <ProjectsListing projects={projects} /> : null}
         {/* Services page body */}
+        {services ? (
+          <ServiceListing services={services} locale={locale!} />
+        ) : null}
       </div>
     </main>
   );

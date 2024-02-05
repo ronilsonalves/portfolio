@@ -1,6 +1,6 @@
 import Avatar from "@/components/institutional/about/image";
 import { CustomPortableText } from "@/components/shared/custom-portable-text";
-import { ContactForm } from "@/components/institutional/about/form";
+import Socials from "@/components/institutional/about/social";
 
 export default function AboutBody(body: any) {
   return (
@@ -14,7 +14,7 @@ export default function AboutBody(body: any) {
           />
         </article>
         <div className="lg:pl-20">
-          <ContactForm />
+          <Socials />
         </div>
       </div>
     </div>

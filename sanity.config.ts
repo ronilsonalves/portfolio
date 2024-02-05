@@ -67,7 +67,7 @@ export default defineConfig({
         { id: "en", title: "English" },
         { id: "pt", title: "Português" },
       ],
-      schemaTypes: ["post", "page", "project"],
+      schemaTypes: ["post", "page", "project", "service"],
       languageField: "language",
     }),
     internationalizedArray({

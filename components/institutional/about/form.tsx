@@ -22,7 +22,6 @@ import { Textarea } from "@/components/ui/textarea";
 import Socials from "./social";
 import sendContactMsg from "@/lib/actions/sendMailMsg";
 
-
 export function ContactForm() {
   const t = useTranslations("Contact");
 
@@ -64,17 +63,13 @@ export function ContactForm() {
           form.reset();
           return setMessage(["success", t("Messages.Success.Description")]);
         default:
-          return setMessage([
-            "error",
-            t("Messages.Error.Description"),
-          ]);
+          return setMessage(["error", t("Messages.Error.Description")]);
       }
     });
   }
 
   return (
     <Form {...form}>
-      <Socials />
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
         <h4 className="text-3xl font-bold">{t("Title")}</h4>
         <FormField
@@ -100,9 +95,7 @@ export function ContactForm() {
               <FormControl>
                 <Input placeholder={t("Form.Subject.Placeholder")} {...field} />
               </FormControl>
-              <FormDescription>
-                {t("Form.Subject.Subtitle")}
-              </FormDescription>
+              <FormDescription>{t("Form.Subject.Subtitle")}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -126,9 +119,14 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem className="dark:text-white">
-              <FormLabel className="dark:text-white">{t("Form.Message.Title")}</FormLabel>
+              <FormLabel className="dark:text-white">
+                {t("Form.Message.Title")}
+              </FormLabel>
               <FormControl>
-                <Textarea placeholder={t("Form.Message.Placeholder")} {...field} />
+                <Textarea
+                  placeholder={t("Form.Message.Placeholder")}
+                  {...field}
+                />
               </FormControl>
               <FormDescription>{t("Form.Message.Subtitle")}</FormDescription>
               <FormMessage />
@@ -136,9 +134,11 @@ export function ContactForm() {
           )}
         />
         {message && (
-          <Alert variant={message[0] === "success" ? "default": "destructive"}>
+          <Alert variant={message[0] === "success" ? "default" : "destructive"}>
             <AlertTitle>
-              {message[0] === "success" ? t("Messages.Success.Title") : t("Messages.Error.Title")}
+              {message[0] === "success"
+                ? t("Messages.Success.Title")
+                : t("Messages.Error.Title")}
             </AlertTitle>
             <AlertDescription>{message[1]}</AlertDescription>
           </Alert>

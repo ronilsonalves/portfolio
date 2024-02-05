@@ -9,6 +9,7 @@ import milestone from "./schemas/objects/milestone";
 import page from "./schemas/documents/page";
 import post from "./schemas/documents/post";
 import project from "./schemas/documents/project";
+import service from "./schemas/documents/service";
 import timeline from "./schemas/objects/timeline";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -22,6 +23,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     page,
     post,
     project,
+    service,
     // @ts-ignore due to an unknown sanity type definition error
     timeline,
   ],
