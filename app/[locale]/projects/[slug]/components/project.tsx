@@ -3,7 +3,6 @@ import { ChevronLeftIcon } from "@/components/shared/icons";
 import ImageBox from "@/components/shared/image-box";
 import ScrollToTopButton from "@/components/shared/scroll-up";
 import { Button } from "@/components/ui/button";
-import type { Project } from "@/types/project";
 import { SanityDocument } from "@sanity/client";
 import { useTranslations } from "next-intl";
 import type { EncodeDataAttributeCallback } from "@sanity/react-loader";
