@@ -22,7 +22,7 @@ export default async function Sitemap(): Promise<{ url: string; lastModified?: s
     })
     await generatePagesSlugs("pt").then(slugs => {
         slugs.forEach((page:any) => {
-            pagesSlug.push("pt/"+page.slug)
+            pagesSlug.push(page.slug)
         })
     })
     const postsSlug: string[] = [];
@@ -33,7 +33,7 @@ export default async function Sitemap(): Promise<{ url: string; lastModified?: s
     })
     await generatePostsSlugs("pt").then(slugs => {
         slugs.forEach((page:any) => {
-            postsSlug.push("pt/articles/"+page.slug)
+            postsSlug.push("artigos/"+page.slug)
         })
     })
 
