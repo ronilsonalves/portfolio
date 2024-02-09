@@ -12,13 +12,12 @@ export default function ServiceCarouselItem({
   service,
 }: ServiceCarouselItemProps) {
   return (
-    <CarouselItem key={service._id} className="">
+    <CarouselItem key={service._id} className="flex flex-col gap-4">
       <Image
         alt={service.title}
         src={urlForImage(service.coverImage)?.url()!}
         width={640}
         height={380}
-        layout="responsive"
         loading="eager"
       />
       <h2 className="text-2xl font-bold md:text-3xl">{service.title}</h2>

@@ -25,7 +25,7 @@ export default function ServiceListing({
   return (
     <div className="mt-8 flex flex-col justify-center gap-4 px-4 md:mx-8 md:px-16">
       {/*Services listing card */}
-      <Card className="">
+      <Card className="mx-auto max-w-3xl">
         <CardContent>
           <Carousel
             className=""
@@ -33,7 +33,7 @@ export default function ServiceListing({
               align: "center",
             }}
           >
-            <CarouselContent className="">
+            <CarouselContent className="mx-auto p-2">
               {services &&
                 services.map((service) => {
                   return (
@@ -47,7 +47,7 @@ export default function ServiceListing({
         </CardContent>
       </Card>
       {/*Contact & meeting schedule card */}
-      <div className="w-full">
+      <div className="">
         <ContactForm />
       </div>
       <div className="flex flex-row place-items-center text-center">

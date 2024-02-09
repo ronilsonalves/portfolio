@@ -19,8 +19,8 @@ export function Footer() {
   const t = useTranslations("Footer");
   const navItems = GetTranslatedFooterNavItems();
   return (
-    <footer className="flex flex-col gap-1 space-y-4 border-t mx-8 py-2 md:py-4">
-      <div className="flex flex-col gap-1 justify-center items-stretch sm:flex-row md:justify-around md:items-center">
+    <footer className="mx-8 flex flex-col gap-1 space-y-4 border-t py-2 md:py-4">
+      <div className="flex flex-col items-stretch justify-center gap-1 sm:flex-row md:items-center md:justify-around">
         <div className="flex flex-col text-left md:items-start">
           <h4 className="text-xl">
             <a href="/" rel="noopener" title={t("Name.title")}>
@@ -28,14 +28,14 @@ export function Footer() {
                 size={"default"}
                 variant={"link"}
                 title={t("Name.title")}
-                className="text-xl px-0"
+                className="px-0 text-xl"
               >
                 {t("Name.title")}
               </Button>
             </a>
           </h4>
-          <p className="text-sm text-left my-2">{t("Description.title")}</p>
-          <div className="flex justify-left space-x-2 h-12">
+          <p className="my-2 text-left text-sm">{t("Description.title")}</p>
+          <div className="justify-left flex h-12 space-x-2">
             <a
               href={icons("Github.Href")}
               target="_blank"
@@ -109,9 +109,14 @@ export function Footer() {
           </div>
         </div>
         <div className="flex flex-col justify-center">
-          <div className="flex flex-col sm:flex-row justify-center sm:space-x-4">
+          <div className="flex flex-col justify-center sm:flex-row sm:space-x-4">
             {navItems.map((item) => (
-              <a href={item.path} key={item.path} rel="noopener" title={item.name}>
+              <a
+                href={item.path}
+                key={item.path}
+                rel="noopener"
+                title={item.name}
+              >
                 <Button
                   size={"default"}
                   variant={"link"}
@@ -125,7 +130,7 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col items-center justify-center">
         <span className="text-md">
           © {new Date().getFullYear()} – {t("Name.title")}
         </span>
@@ -151,12 +156,8 @@ function GetTranslatedFooterNavItems(): NavItem[] {
     },
     {
       name: "Services",
-      path: "/services"
+      path: "/services",
     },
-    {
-      name: "Privacy",
-      path: "/privacy",
-    }
   ];
   const t = useTranslations("Navbar");
   return navItems.map((item) => ({

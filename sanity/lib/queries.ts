@@ -107,7 +107,7 @@ export const projectQuery = groq`*[_type == "project" && slug.current == $slug][
   }
   }`;
 
-export const servicesQuery = groq`*[_type == "service" && language == $language] | order(_createdAt desc)[]`;
+export const servicesQuery = groq`*[_type == "service" && language == $language] | order(title asc)[]`;
 
 export const getPagesSlugByLanguageQuery = groq`*[_type == "page" && language == $language][]{
   "slug": slug.current
