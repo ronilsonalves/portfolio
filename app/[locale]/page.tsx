@@ -37,7 +37,7 @@ export async function generateMetadata({
       description: t("description"),
       images: [
         {
-          url: "https://c.ronilsonalves.com/images/og.svg",
+          url: "https://c.ronilsonalves.com/images/og.png",
           width: 1200,
           height: 630,
           alt: t("title"),
