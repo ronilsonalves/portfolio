@@ -25,7 +25,7 @@ export default function PostHeader({
   title,
 }: PostHeaderProps) {
   return (
-    <header className="mx-8 mb-12 flex w-full flex-col">
+    <header className="md: mx-8 mb-12 flex w-full flex-col xl:place-items-center">
       <h1 className="whitespace-normal text-3xl font-extrabold md:text-4xl dark:text-white">
         {title}
       </h1>
@@ -45,7 +45,7 @@ export default function PostHeader({
           </Badge>
         ))}
       </div>
-      <span className="flex items-center text-base text-black dark:text-white">
+      <span className="mb-2 flex items-center text-base text-black dark:text-white">
         {author ? (
           <span className="mt-4 flex items-center gap-1">
             <Image

@@ -13,7 +13,7 @@ export default function Cover({ image }: CoverProps) {
   const width = asset.split("x")[0];
   const height = asset.split("x")[1];
   return (
-    <figure className="mt-2 flex flex-col justify-center">
+    <figure className="mt-2 flex flex-col place-items-center">
       <Image
         className="prose prose-2xl mx-0 mb-0 w-full rounded-3xl object-cover shadow-xl md:aspect-[2/1] dark:shadow-zinc-800"
         src={builder.image(image).width(width).height(height).url()}

@@ -29,7 +29,7 @@ export default function PostRenderer({ post, locale }: PostRendererProps) {
         locale={locale!}
       />
       {/* Body post content & sidebar with Table of contents */}
-      <div className="grid grid-flow-row grid-cols-12 gap-1 md:grid-flow-col">
+      <div className="grid max-w-6xl grid-flow-row grid-cols-12 gap-1 md:grid-flow-col">
         <PostBody body={body} />
         <TableOfContents slug={slug} locale={locale!} body={body} />
       </div>
