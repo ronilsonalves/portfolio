@@ -10,7 +10,7 @@ interface ProjectCardProps {
 export default function ProjectCard({ project, odd }: ProjectCardProps) {
   return (
     <div
-      className={`flex flex-col gap-x-5 p-2 transition hover:bg-gray-50/50 xl:flex-row ${
+      className={`flex flex-col gap-x-5 p-2 transition hover:bg-zinc-800 xl:flex-row ${
         odd && "border-b border-t xl:flex-row-reverse"
       }`}
     >
@@ -35,7 +35,7 @@ function TextBox({ project }: ProjectCardProps) {
         <div className="mb-2 text-xl font-extrabold tracking-tight md:text-2xl">
           {project.title}
         </div>
-        <div className="font-serif text-gray-500">
+        <div className="font-sans">
           <CustomPortableText value={project.overview} />
         </div>
       </div>
