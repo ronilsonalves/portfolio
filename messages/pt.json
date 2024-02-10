@@ -1,0 +1,175 @@
+{
+  "Navbar": {
+    "Home": {
+      "title": "Home",
+      "path": "/"
+    },
+    "About": {
+      "title": "Sobre",
+      "path": "/pt/sobre"
+    },
+    "Articles": {
+      "title": "Blog",
+      "path": "/pt/artigos"
+    },
+    "Privacy": {
+      "title": "Privacidade",
+      "path": "/pt/privacidade"
+    },
+    "Projects": {
+      "title": "Projetos",
+      "path": "/pt/projetos"
+    },
+    "Services": {
+      "title": "Serviços",
+      "path": "/pt/servicos"
+    },
+    "Mobile": {
+      "title": "Navegação"
+    }
+  },
+  "Home": {
+    "Hero": {
+      "Title": "Olá mundo ✋🏾,",
+      "Subtitle": "Eu sou Ronilson Alves",
+      "Description": "Astrofotografo, astrônomo amador e também desenvolvedor de software com mais de 2 anos de experiência no desenvolvimento de aplicações web usando Java, Spring, Go lang, TypeScript e React."
+    },
+    "Articles": {
+      "Title": "Artigos recentes",
+      "Description": "Aqui estão alguns dos meus artigos publicados no Medium / Dev.to",
+      "Button": "Ver todos os artigos"
+    }
+  },
+  "Articles": {
+    "Card": {
+      "Read": "Ler artigo"
+    },
+    "Load": "Carregar mais artigos",
+    "Empty": "Nenhum artigo encontrado.",
+    "Filters": "Categorias",
+    "TableOfContents": "Tabela de Conteúdo"
+  },
+  "Contact": {
+    "Title": "Vamos conversar?",
+    "Form": {
+      "Name": {
+        "Title": "Nome",
+        "Subtitle": "Qual é o seu nome?",
+        "Placeholder": "Ciclano da Silva"
+      },
+      "Subject": {
+        "Title": "Assunto",
+        "Subtitle": "O assunto da mensagem (Opcional)",
+        "Placeholder": "Por que você está entrando em contato?"
+      },
+      "Email": {
+        "Title": "Email",
+        "Subtitle": "Qual é o seu email?",
+        "Placeholder": "ciclano@gmail.com"
+      },
+      "Message": {
+        "Title": "Mensagem",
+        "Subtitle": "Qual é a sua mensagem?",
+        "Placeholder": "Por que você está entrando em contato?"
+      },
+      "Button": "Enviar mensagem",
+      "Validation": {
+        "Name": {
+          "Required": "Seu nome é obrigatório.",
+          "MinLength": "Por favor, digite um nome válido."
+        },
+        "Subject": {
+          "Required": "Assunto é obrigatório.",
+          "MinLength": "Por favor, digite um assunto válido."
+        },
+        "Email": {
+          "Required": "Seu email é obrigatório.",
+          "Invalid": "Por favor, informe um email válido."
+        },
+        "Message": {
+          "Required": "A sua mensagem é obrigatória.",
+          "MinLength": "A sua mensagem deve ter no mínimo 60 caracteres."
+        }
+      }
+    },
+    "Messages": {
+      "Success": {
+        "Title": "Mensagem enviada com sucesso!",
+        "Description": "Obrigado por entrar em contato. Em breve respondo sua mensagem."
+      },
+      "Error": {
+        "Title": "Erro ao enviar mensagem",
+        "Description": "Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente mais tarde."
+      }
+    }
+  },
+  "Projects": {
+    "Details": "Ver detalhes",
+    "Client": "Cliente",
+    "Duration": "Duração",
+    "BackTo": "Voltar para projetos"
+  },
+  "Services": {
+    "OrText": "Ou",
+    "Schedule": "Agende uma reunião",
+    "Description": "Se preferir, você pode agendar uma reunião comigo para discutirmos sobre suas necessidades e como posso te ajudar."
+  },
+  "Socials": {
+    "Title": "Encontre-me nas redes sociais",
+    "Description": "Você pode me encontrar nas seguintes redes sociais:",
+    "Github": {
+      "Title": "Meu perfil no Github",
+      "Href": "https://github.com/ronilsonalves"
+    },
+    "LinkedIn": {
+      "Title": "Meu perfil no Linkedin",
+      "Href": "https://www.linkedin.com/in/ronilsonalves/"
+    },
+    "TikTok": {
+      "Title": "Meu perfil no TikTok",
+      "Href": "https://www.tiktok.com/@ronilsonalves"
+    },
+    "Twitter": {
+      "Title": "Meu perfil no Twitter",
+      "Href": "https://twitter.com/ronilsonalves"
+    },
+    "YouTube": {
+      "Title": "Meu canal no Youtube",
+      "Href": "https://www.youtube.com/@ronilsonalves"
+    }
+  },
+  "Footer": {
+    "Name": {
+      "title": "Ronilson Alves"
+    },
+    "Description": {
+      "title": "Astrofotografo, astrônomo amador e também desenvolvedor de software."
+    },
+    "Copyright": {
+      "text": "Todos os direitos reservados."
+    }
+  },
+  "Errors": {
+    "404": {
+      "title": "Página não encontrada",
+      "description": "A página que você está procurando não existe.",
+      "button": "Voltar para a página inicial"
+    },
+    "500": {
+      "title": "Erro interno do servidor",
+      "description": "Ocorreu um erro interno no servidor.",
+      "button": "Voltar para a página inicial"
+    }
+  },
+  "Metadata": {
+    "Title": "Ronilson Alves – Desenvolvedor de Software",
+    "Description": "Astrofotografo, astrônomo amador e também desenvolvedor de software com mais de 2 anos de experiência no desenvolvimento de aplicações web usando Java, Spring, Go lang, TypeScript e React.",
+    "Home": {
+      "title": "Ronilson Alves - Desenvolvedor de Software",
+      "description": "Astrofotografo, astrônomo amador e também desenvolvedor de software com mais de 2 anos de experiência no desenvolvimento de aplicações web usando Java, Spring, Go lang, TypeScript e React."
+    },
+    "Projects": {
+      "title": "– Projetos –"
+    }
+  }
+}

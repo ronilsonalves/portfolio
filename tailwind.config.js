@@ -2,7 +2,7 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
+    "./institutional/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
@@ -12,6 +12,7 @@ module.exports = {
       center: true,
       padding: "2rem",
       screens: {
+        md: "768px",
         "2xl": "1400px",
       },
     },
@@ -72,5 +73,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };
