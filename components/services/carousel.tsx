@@ -19,6 +19,7 @@ export default function ServiceCarouselItem({
         width={640}
         height={380}
         loading="eager"
+        className="place-self-center"
       />
       <h2 className="text-2xl font-bold md:text-3xl">{service.title}</h2>
       <CustomPortableText value={service.overview} />

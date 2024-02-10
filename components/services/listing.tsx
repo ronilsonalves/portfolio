@@ -25,7 +25,7 @@ export default function ServiceListing({
   return (
     <div className="mt-8 flex flex-col justify-center gap-4 px-4 md:mx-8 md:px-16">
       {/*Services listing card */}
-      <Card className="mx-auto max-w-3xl">
+      <Card className="mx-auto w-full md:max-w-3xl xl:max-w-6xl">
         <CardContent>
           <Carousel
             className=""
