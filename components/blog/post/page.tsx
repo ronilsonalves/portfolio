@@ -34,7 +34,7 @@ export default function PostRenderer({ post, locale }: PostRendererProps) {
         <TableOfContents slug={slug} locale={locale!} body={body} />
       </div>
       {/* Comments */}
-      <div className="w-full">
+      <div className="w-full xl:max-w-screen-xl">
         <Comments lang={locale} theme={theme} />
       </div>
       {/* Scroll to top button */}

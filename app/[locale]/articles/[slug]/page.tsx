@@ -47,13 +47,13 @@ export async function generateMetadata({
       },
     },
     title: post.title + " – Ronilson Alves",
-    description: toPlainText(post.summary),
+    description: post.summary,
     keywords: categories?.join(", "),
     openGraph: {
       type: "article",
       locale: locale,
       url: locale === "en" ? "/articles/" + slug : "/artigos/" + slug,
-      description: toPlainText(post.summary),
+      description: post.summary,
       siteName: "Ronilson Alves – Software Developer",
       title: post.title + " – " + process.env.NEXT_PUBLIC_SITE_NAME,
       images: [
