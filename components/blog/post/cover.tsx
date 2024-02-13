@@ -20,6 +20,7 @@ export default function Cover({ image }: CoverProps) {
         width={width}
         height={height}
         alt={image.alt}
+        priority
       />
       <figcaption className="mx-4 mt-2 text-gray-600 dark:text-gray-100">
         {image.alt}

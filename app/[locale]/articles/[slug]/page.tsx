@@ -1,12 +1,11 @@
-import { SanityDocument } from "@sanity/client";
 import PostRenderer from "@/components/blog/post/page";
-import { postQuery } from "@/sanity/lib/queries";
+import { getPostCategories } from "@/lib/utils";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlForOpenGraphImage } from "@/sanity/lib/image";
-import { notFound } from "next/navigation";
+import { postQuery } from "@/sanity/lib/queries";
+import { SanityDocument } from "@sanity/client";
 import { Metadata } from "next";
-import { toPlainText } from "@portabletext/react";
-import { getPostCategories } from "@/lib/utils";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params: { slug, locale },
@@ -26,14 +25,18 @@ export async function generateMetadata({
     };
   }
 
-  const languages = post?._translations?.filter(
+  const translations = post?._translations?.filter(
     (translation: any) => translation !== undefined,
   );
 
   const categories = getPostCategories(post);
 
-  const en = languages.filter((language: any) => language?.language === "en");
-  const pt = languages.filter((language: any) => language?.language === "pt");
+  const en = translations.filter(
+    (translation: any) => translation?.language === "en",
+  );
+  const pt = translations.filter(
+    (translation: any) => translation?.language === "pt",
+  );
 
   return {
     metadataBase: new URL(
