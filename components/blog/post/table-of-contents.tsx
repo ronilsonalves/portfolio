@@ -31,10 +31,7 @@ export default function TableOfContents({
             {t("TableOfContents")}
           </AccordionTrigger>
           <AccordionContent className="flex flex-col flex-wrap place-items-start">
-            <CustomPortableTextHeadings
-              value={body as any}
-              slug={locale === "en" ? `articles/${slug}` : `artigos/${slug}`}
-            />
+            <CustomPortableTextHeadings value={body as any} />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

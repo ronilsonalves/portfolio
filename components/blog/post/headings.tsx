@@ -1,15 +1,21 @@
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export function CustomPortableTextHeadings({
-  value,
-  slug,
+  value
 }: {
   value: PortableTextBlock[];
-  slug: string;
 }) {
+  const handleClick = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 100,
+        behavior: "smooth",
+      });
+    }
+  };
   const headings: PortableTextComponents = {
     block: {
       h1: ({ children }) => {
@@ -18,8 +24,9 @@ export function CustomPortableTextHeadings({
             className="my-2 h-auto text-wrap text-left text-sm font-bold"
             variant={"link"}
             size={"lg"}
+            onClick={() => handleClick(children as string)}
           >
-            <Link href={`/${slug}#${children}`}>{children}</Link>
+            {children}
           </Button>
         );
       },
@@ -29,8 +36,9 @@ export function CustomPortableTextHeadings({
             className="my-2 h-auto text-wrap text-left text-sm font-bold"
             variant={"link"}
             size={"lg"}
+            onClick={() => handleClick(children as string)}
           >
-            <Link href={`/${slug}#${children}`}>{children}</Link>
+            {children}
           </Button>
         );
       },
@@ -40,8 +48,9 @@ export function CustomPortableTextHeadings({
             className="my-2 h-auto text-wrap text-left text-sm font-bold"
             variant={"link"}
             size={"lg"}
+            onClick={() => handleClick(children as string)}
           >
-            <Link href={`/${slug}#${children}`}>{children}</Link>
+            {children}
           </Button>
         );
       },
@@ -51,8 +60,9 @@ export function CustomPortableTextHeadings({
             className="my-2 h-auto text-wrap text-left text-sm font-bold"
             variant={"link"}
             size={"lg"}
+            onClick={() => handleClick(children as string)}
           >
-            <Link href={`/${slug}#${children}`}>{children}</Link>
+            {children}
           </Button>
         );
       },
