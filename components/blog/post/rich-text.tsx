@@ -18,6 +18,7 @@ const AdSenseComponent = lazy(() =>
     default: mod.AdSenseComponent,
   })),
 );
+import { cn } from "@/lib/utils";
 
 const builder = imageUrlBuilder(client);
 
@@ -37,16 +38,18 @@ hljs.registerLanguage("yaml", yaml);
 export const RichTextComponents = {
   types: {
     code: ({ value }: any) => {
+      const fallbackLanguage =
+        value.language === undefined ? "bash" : value.language;
       return (
         <pre className="prose mx-8 mb-0 mt-0 whitespace-break-spaces shadow-2xl">
           <code
-            className={`language-${value.language} whitespace-break-spaces`}
+            className={`language-${fallbackLanguage} whitespace-break-spaces`}
             aria-hidden={true}
             contentEditable={false}
             dangerouslySetInnerHTML={{
               __html: hljs.highlight(
                 value.code,
-                { language: value.language },
+                { language: fallbackLanguage },
                 true,
               ).value,
             }}
@@ -58,14 +61,14 @@ export const RichTextComponents = {
       switch (value.style) {
         case "h1":
           return (
-            <h1 className="prose md:prose-xl ml-8 text-black dark:text-white">
+            <h1 className="prose md:prose-xl ml-4 text-black dark:text-white">
               {value.children[0].text}
             </h1>
           );
         case "h2":
           return (
             <h2
-              className="prose md:prose-xl ml-8 text-black dark:text-white"
+              className="prose md:prose-xl ml-4 text-black dark:text-white"
               id={value.children[0].text}
             >
               {value.children[0].text}
@@ -83,7 +86,7 @@ export const RichTextComponents = {
         case "h4":
           return (
             <h4
-              className="prose md:prose-xl ml-8 whitespace-pre-wrap text-black dark:text-white"
+              className="prose md:prose-xl ml-10 whitespace-pre-wrap text-black dark:text-white"
               id={value.children[0].text}
             >
               {value.children[0].text}
@@ -96,9 +99,36 @@ export const RichTextComponents = {
             </blockquote>
           );
         case "normal":
-        default:
+        default: {
+          let className = "";
+          value.children &&
+            value.children.map((child: any) => {
+              child.marks &&
+                child.marks.map((mark: any) => {
+                  switch (mark) {
+                    case "strong":
+                      className = "font-bold text-zinc-950 dark:text-zinc-50";
+                      break;
+                    case "em":
+                    case "italic":
+                      className = "font-light italic";
+                      break;
+                    case "link":
+                      return <a href={child.text}>{child.text}</a>;
+                    default:
+                      className = "";
+                      break;
+                  }
+                });
+            });
+
           return (
-            <p className="prose md:prose-xl ml-8 text-black dark:text-white">
+            <p
+              className={cn(
+                className,
+                "prose md:prose-xl ml-8 text-black dark:text-white",
+              )}
+            >
               {value.children &&
                 value.children
                   .map((child: any) => {
@@ -107,6 +137,7 @@ export const RichTextComponents = {
                   .join(" ")}
             </p>
           );
+        }
       }
     },
     image: ({ value }: any) => {
@@ -131,6 +162,21 @@ export const RichTextComponents = {
     },
     ads: ({ value }: any) => {
       return <AdSenseComponent adSlot={value.adsenseSlot} />;
+    },
+  },
+  marks: {
+    link: ({ children, mark }: any) => {
+      return <a href={children[0].text}>{mark}</a>;
+    },
+    em: ({ children }: any) => {
+      return <em className="font-light italic">{children}</em>;
+    },
+    strong: ({ children }: any) => {
+      return (
+        <strong className="font-bold text-zinc-950 dark:text-zinc-50">
+          {children}
+        </strong>
+      );
     },
   },
 };

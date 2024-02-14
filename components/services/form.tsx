@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import Socials from "./social";
 import sendContactMsg from "@/lib/actions/sendMailMsg";
 
 export function ContactForm() {
@@ -70,7 +69,10 @@ export function ContactForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="mx-auto w-full space-y-2 md:max-w-3xl xl:max-w-6xl"
+      >
         <h4 className="text-3xl font-bold">{t("Title")}</h4>
         <FormField
           control={form.control}

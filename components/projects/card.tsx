@@ -10,7 +10,7 @@ interface ProjectCardProps {
 export default function ProjectCard({ project, odd }: ProjectCardProps) {
   return (
     <div
-      className={`flex flex-col gap-x-5 p-2 transition hover:bg-zinc-800 xl:flex-row ${
+      className={`flex flex-col gap-x-5 p-2 transition hover:bg-zinc-100 xl:flex-row dark:hover:bg-zinc-800 ${
         odd && "border-b border-t xl:flex-row-reverse"
       }`}
     >
