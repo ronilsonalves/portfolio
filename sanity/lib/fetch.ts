@@ -22,10 +22,17 @@ export async function sanityFetch<QueryResponse>({
   const isDraftMode = draftMode().isEnabled;
   if (isDraftMode && !token) {
     throw new Error(
-      "The `SANITY_API_READ_TOKEN` environment variable is required."
+      "The `SANITY_API_READ_TOKEN` environment variable is required.",
     );
   }
   const isDevelopment = process.env.NODE_ENV === "development";
+  console.info(
+    new Date() +
+      " Fetching data from Sanity... development mode: " +
+      isDevelopment +
+      " Draft mode: " +
+      isDraftMode,
+  );
 
   return client
     .withConfig({ useCdn: true })
@@ -33,7 +40,7 @@ export async function sanityFetch<QueryResponse>({
       cache: isDevelopment || isDraftMode ? undefined : "force-cache",
       ...(isDraftMode && {
         token: token,
-        perspective: "previewDrafts",
+        perspective: "published",
       }),
       next: {
         ...(isDraftMode && { revalidate: 30 }),
@@ -44,6 +51,7 @@ export async function sanityFetch<QueryResponse>({
 
 export function generateStaticSlugs(type: string) {
   return client.fetch<string[]>(
-    groq`*[_type == "${type} && defined(slug.current)"]{"slug": slug.current}`, {type}
-  )
+    groq`*[_type == "${type} && defined(slug.current)"]{"slug": slug.current}`,
+    { type },
+  );
 }
