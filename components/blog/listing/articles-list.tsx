@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Search from "@/components/blog/search/search";
 
 interface ArticleListProps {
@@ -17,7 +18,9 @@ export default function ArticleList({ language }: ArticleListProps) {
       <div className="grid grid-cols-6 gap-8 py-10 lg:px-20">
         <div className="col-span-6">
           <div className="grid grid-cols-1 gap-8">
-            <Search language={language} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Search language={language} />
+            </Suspense>
           </div>
         </div>
       </div>
