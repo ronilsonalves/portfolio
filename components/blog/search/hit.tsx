@@ -75,5 +75,5 @@ export function Hit({ hit, locale }: HitProps) {
 function localeURL(locale: string, slug: string) {
   return locale === "en" || undefined
     ? `/articles/` + slug
-    : `articles/` + slug;
+    : `/artigos/` + slug;
 }

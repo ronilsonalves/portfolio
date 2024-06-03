@@ -37,7 +37,8 @@
     "Articles": {
       "Title": "Artigos recentes",
       "Description": "Aqui estão alguns dos meus artigos publicados no Medium / Dev.to",
-      "Button": "Ver todos os artigos"
+      "Button": "Ver todos os artigos",
+      "Read": "Ler artigo"
     }
   },
   "Articles": {

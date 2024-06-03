@@ -6,9 +6,10 @@ const builder = imageUrlBuider(client);
 
 interface CoverProps {
   image: any;
+  title: string;
 }
 
-export default function Cover({ image }: CoverProps) {
+export default function Cover({ image, title }: CoverProps) {
   const asset = image.asset._ref.split("-")[2];
   const width = asset.split("x")[0];
   const height = asset.split("x")[1];
@@ -19,11 +20,11 @@ export default function Cover({ image }: CoverProps) {
         src={builder.image(image).width(width).height(height).url()}
         width={width}
         height={height}
-        alt={image.alt}
+        alt={image.alt || title}
         priority
       />
       <figcaption className="mx-4 mt-2 text-gray-600 dark:text-gray-100">
-        {image.alt}
+        {image.alt || title}
       </figcaption>
     </figure>
   );
