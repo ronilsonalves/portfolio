@@ -66,7 +66,7 @@ export default function PostHeader({
           </span>
         ) : null}
       </span>
-      <Cover image={coverImage} />
+      <Cover image={coverImage} title={title} />
     </header>
   );
 }

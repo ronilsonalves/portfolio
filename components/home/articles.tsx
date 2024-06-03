@@ -17,27 +17,26 @@ interface ArticlesProps {
   locale?: string;
 }
 
-export default function Articles({articles, locale}: ArticlesProps) {
+export default function Articles({ articles, locale }: ArticlesProps) {
   const t = useTranslations("Home.Articles");
   return (
     <section className="flex flex-col">
       <div className="container py-10 lg:px-40 flex flex-col justify-end">
-        <h2 className="mb-5 text-5xl font-bold break-after-column">{t('Title')}</h2>
+        <h2 className="mb-5 text-5xl font-bold break-after-column">
+          {t("Title")}
+        </h2>
         <p className="mb-6 text-lg dark:text-white/70 text-black/70">
-          {t('Description')}
+          {t("Description")}
         </p>
         <div className="grid grid-cols-1 gap-4 ">
           {articles.map((post) => (
-            <Link
-              href={localeURL(locale!, post.slug.current)}
-              key={post.title}
-            >
+            <Link href={localeURL(locale!, post.slug.current)} key={post.title}>
               <Post key={post.title} post={post} locale={locale} />
             </Link>
           ))}
         </div>
         <Link
-          href={locale == 'en' ? `/articles` : `/${locale}/artigos`}
+          href={locale == "en" ? `/articles` : `/${locale}/artigos`}
           title={t("Button")}
         >
           <Button
@@ -45,7 +44,7 @@ export default function Articles({articles, locale}: ArticlesProps) {
             size={"lg"}
             className="mt-2 hover:animate-pulse self-end"
           >
-            {t('Button') +` >`}
+            {t("Button") + ` >`}
           </Button>
         </Link>
       </div>
@@ -53,7 +52,8 @@ export default function Articles({articles, locale}: ArticlesProps) {
   );
 }
 
-function Post({ post, locale }: { post: SanityDocument, locale?: string }) {
+function Post({ post, locale }: { post: SanityDocument; locale?: string }) {
+  const t = useTranslations("Home.Articles");
   return (
     <article title={post.title}>
       <Card className="hover:bg-black/5 dark:hover:bg-white/10 dark:border-1">
@@ -67,9 +67,9 @@ function Post({ post, locale }: { post: SanityDocument, locale?: string }) {
             </span>
             <p
               className="text-sm text-gray-500 "
-              title={formatDate(new Date(post.publishedAt),locale)}
+              title={formatDate(new Date(post.publishedAt), locale)}
             >
-              {formatDate(new Date(post.publishedAt),locale)}
+              {formatDate(new Date(post.publishedAt), locale)}
             </p>
           </div>
           <CardTitle className="h2 text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
@@ -87,7 +87,7 @@ function Post({ post, locale }: { post: SanityDocument, locale?: string }) {
             title="Read article"
             type="button"
           >
-            Read article
+            {t("Read")}
             <ChevronRightIcon />
           </Button>
         </CardFooter>
@@ -97,5 +97,7 @@ function Post({ post, locale }: { post: SanityDocument, locale?: string }) {
 }
 
 function localeURL(locale: string, slug: string) {
-  return locale === 'en' || undefined ? `/articles/`+slug : locale+'/articles/' + slug
+  return locale === "en" || undefined
+    ? `/articles/` + slug
+    : locale + "/artigos/" + slug;
 }

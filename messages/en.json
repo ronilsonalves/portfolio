@@ -37,7 +37,8 @@
     "Articles": {
       "Title": "Articles",
       "Description": "Here you will find some of my articles published on Medium / The Pratical Dev.",
-      "Button": "See all articles"
+      "Button": "See all articles",
+      "Read": "Read article"
     }
   },
   "Articles": {
