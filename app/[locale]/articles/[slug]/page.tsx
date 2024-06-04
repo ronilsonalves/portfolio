@@ -46,7 +46,7 @@ export async function generateMetadata({
       canonical: locale === "en" ? "/articles/" + slug : "/artigos/" + slug,
       languages: {
         en: en.length > 0 ? "/articles/" + en[0].slug.current : "/",
-        pt: pt.length > 0 ? "/artigos/" + pt[0].slug.current : "/pt",
+        pt: pt.length > 0 ? "/pt/artigos/" + pt[0].slug.current : "/pt",
       },
     },
     title: post.title + " – Ronilson Alves",
@@ -55,7 +55,7 @@ export async function generateMetadata({
     openGraph: {
       type: "article",
       locale: locale,
-      url: locale === "en" ? "/articles/" + slug : "/artigos/" + slug,
+      url: locale === "en" ? "/articles/" + slug : "/pt/artigos/" + slug,
       description: post.summary,
       siteName: "Ronilson Alves – Software Developer",
       title: post.title + " – " + process.env.NEXT_PUBLIC_SITE_NAME,
