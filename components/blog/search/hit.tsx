@@ -4,7 +4,7 @@
 
 import { Hit as AlgoliaHit } from "instantsearch.js";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import {
   Card,
   CardDescription,
@@ -23,13 +23,13 @@ type HitProps = {
     summary: string;
     publishedAt: string;
   }>;
-  locale: string;
 };
 
-export function Hit({ hit, locale }: HitProps) {
+export function Hit({ hit }: HitProps) {
   const t = useTranslations("Articles");
+  const locale = useLocale();
   return (
-    <Link href={localeURL(locale!, hit.slug)} key={hit.objectID}>
+    <Link href={localeURL(locale, hit.slug)} key={hit.objectID}>
       <article title={hit.title} className="col-auto gap-4">
         <Card className="dark:border-1 hover:bg-black/5 dark:hover:bg-white/10">
           <CardHeader>

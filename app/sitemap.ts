@@ -41,7 +41,7 @@ export default async function Sitemap(): Promise<
   const pagesSlug: string[] = [];
   await generatePagesSlugs("en").then((slugs) => {
     slugs.forEach((page: any) => {
-      pagesSlug.push("en/" + page.slug);
+      pagesSlug.push(page.slug);
     });
   });
   await generatePagesSlugs("pt").then((slugs) => {
@@ -52,7 +52,7 @@ export default async function Sitemap(): Promise<
   const postsSlug: string[] = [];
   await generatePostsSlugs("en").then((slugs) => {
     slugs.forEach((page: any) => {
-      postsSlug.push("en/articles/" + page.slug);
+      postsSlug.push("articles/" + page.slug);
     });
   });
   await generatePostsSlugs("pt").then((slugs) => {

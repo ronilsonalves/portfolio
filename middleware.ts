@@ -8,7 +8,7 @@ export default createMiddleware({
   defaultLocale: "en",
 
   // The directory that contains our locale JSON files, working with "as-needed"
-  localePrefix: "never",
+  localePrefix: "as-needed",
 
   pathnames: {
     "/": "/",
