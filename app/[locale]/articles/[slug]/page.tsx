@@ -43,13 +43,13 @@ export async function generateMetadata({
       process.env.NEXT_PUBLIC_SITE_URL || "https://www.ronilsonalves.com",
     ),
     alternates: {
-      canonical: locale === "en" ? "/articles/" + slug : "/artigos/" + slug,
+      canonical: locale === "en" ? "/articles/" + slug : "/pt/artigos/" + slug,
       languages: {
         en: en.length > 0 ? "/articles/" + en[0].slug.current : "/",
         pt: pt.length > 0 ? "/pt/artigos/" + pt[0].slug.current : "/pt",
       },
     },
-    title: post.title + " – Ronilson Alves",
+    title: post.title + " - Ronilson Alves",
     description: post.summary,
     keywords: categories?.join(", "),
     openGraph: {
