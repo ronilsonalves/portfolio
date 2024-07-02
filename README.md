@@ -1,6 +1,6 @@
 # My personal website
 
-Hello world! I'm Ronilson Alves, a software developer from Brazil. This is the source code of my personal website/portfolio, which is available at [ronilsonalves.com](https://www.ronilsonalves.com) – English home page or [ronilson.dev.br](https://ronilson.dev.br) – Página Inicial em Português.
+Hello world! I'm Ronilson Alves, a software developer from Brazil. This is the source code of my personal website/portfolio, which is available at [ronilsonalves.com](https://www.ronilsonalves.com) – English home page or [ronilson.dev.br](https://ronilson.dev.br) – página inicial em Português.
 
 ## Table of Contents
 - [Features](#features)
@@ -10,8 +10,11 @@ Hello world! I'm Ronilson Alves, a software developer from Brazil. This is the s
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
     - [Running](#running)
-    - [Deploying](#deploying)
+- [Deploying](#deploying)
+    - [Vercel](#vercel)
+    - [Building a Docker Image](#building-a-docker-image) !!coming soon!!
 - [License](#license)
+
 ## Features
 Some of the features of this website are:
 - [x] Internationalization (i18n)
@@ -21,6 +24,7 @@ Some of the features of this website are:
 - [ ] AMP support
 - [x] Blogging system with [Sanity](https://www.sanity.io/)
 - [x] Comments in the blog posts with [Giscus](https://giscus.app/)
+- [ ] Support to related posts
 - [x] Blog posts instant search with [Algolia](https://www.algolia.com/)
 - [x] Contact form with [Resend](https://resend.com/)
 - [x] Support to Google Tag Manager
@@ -28,7 +32,8 @@ Some of the features of this website are:
 
 
 ## Development
-This website was built using TypeScript, React, Next.js, Tailwind CSS, shadcn/ui and deployed to Vercel and a personal challenge to learn more about these technologies.
+This website was built using TypeScript, React, Next.js, Tailwind CSS, shadcn/ui and deployed to Vercel and as personal challenge to learn more about these technologies.
+
 ### Main Used Libraries
 - [React](https://reactjs.org/)
 - [Next.js](https://nextjs.org/)
@@ -79,12 +84,20 @@ To index the blog posts in Algolia, you need to create an Algolia index and set 
 
 To allow the comments in the blog posts, you need to configure the giscusapp. You can find more information about Giscus in the [official documentation](https://giscus.app/).
 
-### Deploying
-If you are familiar with Vercel, you can deploy the website using it. You can find more information about Vercel in the [official documentation](https://vercel.com/docs).
+## Deploying
+### Vercel
+If you are familiar with Vercel, you can deploy the website using it. You can find more information about Vercel in the [official documentation](https://vercel.com/docs). Also, you can build the website using the npm build script and deploy it to any other hosting service that supports Next.js. Or you can build a docker image and deploy it to a container service.
 
 To use Algolia indexing, you need to create a Sanity Webhook and set 'https://your-website.vercel.app/algolia/webhook' to trigger the indexing when you publish a new document. You can find more information about this in the [official documentation](https://www.sanity.io/docs/webhooks) and the docs of the official [Sanity Algolia plugin](https://www.sanity.io/plugins/sanity-algolia).
 
-A warning: Currently, every time that you publish a new document in the Sanity Studio, you need to redeploy the website to Next.js generate the new static pages. This is because the Sanity Studio is embebbed in the Next.js development server and the Next.js development server doesn't support incremental static regeneration. You can find more information about this in the [official documentation](https://nextjs.org/docs/advanced-features/automatic-static-optimization#incremental-static-regeneration). There's a [plugin](https://www.sanity.io/plugins/vercel-deploy) to redeploy the website automatically when you publish a new document, but I didn't test it, also I'm working on my own solution to this problem. 
+A warning: Currently, every time that you publish a new document in the Sanity Studio, you need to redeploy the website to Next.js generate the new static pages. This is because the Sanity Studio is embebbed in the Next.js development server and the Next.js development server doesn't support incremental static regeneration. You can find more information about this in the [official documentation](https://nextjs.org/docs/advanced-features/automatic-static-optimization#incremental-static-regeneration). There's a [plugin](https://www.sanity.io/plugins/vercel-deploy) to redeploy the website automatically when you publish a new document, but I didn't test it, also I'm working on my own solution to this problem.
+
+### Building a Docker Image
+You can build a docker image and deploy it to a container service. You can find more information about Docker in the [official documentation](https://docs.docker.com/). You can use the Dockerfile in the root directory of the project to build the image.
+
+```bash
+More information coming soon...
+```
 
 ## License
-This project is open source and available under the [MIT License](LICENSE). 
+This project is open source and available under the [MIT License](LICENSE).
