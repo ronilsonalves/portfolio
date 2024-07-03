@@ -9,7 +9,7 @@ jobs:
   deploy:
     name: Build and publish Docker preview image
     runs-on: ubuntu-latest
-
+    environment: Preview
     steps:
       - name: Checkout
         uses: actions/checkout@v4
