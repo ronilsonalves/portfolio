@@ -1,4 +1,4 @@
-name: ci_preview
+name: CI_Preview
 
 on:
   push:
@@ -29,7 +29,7 @@ jobs:
       # Docs: https://docs.oracle.com/pt-br/iaas/Content/Registry/Tasks/registrypushingimagesusingthedockercli.htms
 
       - name: Debug access to Github secrets environments variables
-        run: echo ${{ secrets.PUBLIC_VAR }}
+        run: echo "The value of PUBLIC_VAR is ${{ secrets.PUBLIC_VAR }}"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
