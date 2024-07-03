@@ -28,13 +28,10 @@ jobs:
           password: ${{ secrets.OCIR_AUTH_TOKEN }}
       # Docs: https://docs.oracle.com/pt-br/iaas/Content/Registry/Tasks/registrypushingimagesusingthedockercli.htms
 
-      - name: Debug access to Github secrets environments variables
-        run: echo "The value of PUBLIC_VAR is ${{ secrets.PUBLIC_VAR }}"
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/arm64
           context: .
           file: Dockerfile
           tags: ${{ secrets.OCIR_REGISTRY }}/${{ secrets.OCI_TENACY_NAMESPACE }}/${{ secrets.OCIR_REPO_NAME }}:preview
