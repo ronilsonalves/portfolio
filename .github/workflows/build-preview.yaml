@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     name: Build and publish Docker preview image
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     environment: Preview
     steps:
       - name: Checkout
