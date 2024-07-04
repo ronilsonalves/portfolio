@@ -27,27 +27,27 @@ jobs:
       - name: Build Docker Image
         run: |
           echo "Building the Docker image..." /
-          docker build . --file Dockerfile /
+          docker build /
           --platform linux/arm64 /
-          --build-arg ALGOLIA_ADMIN_API_KEY=${{ secrets.ALGOLIA_ADMIN_API_KEY }} \
-          --build-arg CONTACT_MAIL_TO=${{ secrets.CONTACT_MAIL_TO }} \
-          --build-arg NEXT_PUBLIC_ALGOLIA_APP_ID=${{ secrets.NEXT_PUBLIC_ALGOLIA_APP_ID }} \
-          --build-arg NEXT_PUBLIC_ALGOLIA_INDEX_NAME=${{ secrets.NEXT_PUBLIC_ALGOLIA_INDEX_NAME }} \
-          --build-arg NEXT_PUBLIC_ALGOLIA_PT_INDEX_NAME=${{ secrets.NEXT_PUBLIC_ALGOLIA_PT_INDEX_NAME }} \
-          --build-arg NEXT_PUBLIC_ALGOLIA_SEARCH_KEY=${{ secrets.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY }} \
-          --build-arg NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID }} \
-          --build-arg NEXT_PUBLIC_GOOGLE_ADSENSE_SLOT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_ADSENSE_SLOT_ID }} \
-          --build-arg NEXT_PUBLIC_GTM_ID=${{ secrets.NEXT_PUBLIC_GTM_ID }} \
-          --build-arg NEXT_PUBLIC_SANITY_API_VERSION=${{ secrets.NEXT_PUBLIC_SANITY_API_VERSION }} \
-          --build-arg NEXT_PUBLIC_SANITY_DATASET=${{ secrets.NEXT_PUBLIC_SANITY_DATASET }} \
-          --build-arg NEXT_PUBLIC_SANITY_PROJECT_ID=${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }} \
-          --build-arg NEXT_PUBLIC_SITE_NAME=${{ secrets.NEXT_PUBLIC_SITE_NAME }} \
-          --build-arg NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }} \
-          --build-arg RESEND_API_KEY=${{ secrets.RESEND_API_KEY }} \
-          --build-arg RESEND_EMAIL_FROM=${{ secrets.RESEND_EMAIL_FROM }} \
-          --build-arg SANITY_API_READ_TOKEN=${{ secrets.SANITY_API_READ_TOKEN }} \
-          --build-arg SANITY_API_TOKEN=${{ secrets.SANITY_API_TOKEN }} \
-          --build-arg SANITY_WEBHOOK_SECRET=${{ secrets.SANITY_WEBHOOK_SECRET }} \
+          --build-arg ALGOLIA_ADMIN_API_KEY="${{ secrets.ALGOLIA_ADMIN_API_KEY }}" \
+          --build-arg CONTACT_MAIL_TO="${{ secrets.CONTACT_MAIL_TO }}" \
+          --build-arg NEXT_PUBLIC_ALGOLIA_APP_ID="${{ secrets.NEXT_PUBLIC_ALGOLIA_APP_ID }}" \
+          --build-arg NEXT_PUBLIC_ALGOLIA_INDEX_NAME="${{ secrets.NEXT_PUBLIC_ALGOLIA_INDEX_NAME }}" \
+          --build-arg NEXT_PUBLIC_ALGOLIA_PT_INDEX_NAME="${{ secrets.NEXT_PUBLIC_ALGOLIA_PT_INDEX_NAME }}" \
+          --build-arg NEXT_PUBLIC_ALGOLIA_SEARCH_KEY="${{ secrets.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY }}" \
+          --build-arg NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID="${{ secrets.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID }}" \
+          --build-arg NEXT_PUBLIC_GOOGLE_ADSENSE_SLOT_ID="${{ secrets.NEXT_PUBLIC_GOOGLE_ADSENSE_SLOT_ID }}" \
+          --build-arg NEXT_PUBLIC_GTM_ID="${{ secrets.NEXT_PUBLIC_GTM_ID }}" \
+          --build-arg NEXT_PUBLIC_SANITY_API_VERSION="${{ secrets.NEXT_PUBLIC_SANITY_API_VERSION }}" \
+          --build-arg NEXT_PUBLIC_SANITY_DATASET="${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}" \
+          --build-arg NEXT_PUBLIC_SANITY_PROJECT_ID="${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}" \
+          --build-arg NEXT_PUBLIC_SITE_NAME="${{ secrets.NEXT_PUBLIC_SITE_NAME }}" \
+          --build-arg NEXT_PUBLIC_SITE_URL="${{ secrets.NEXT_PUBLIC_SITE_URL }}" \
+          --build-arg RESEND_API_KEY="${{ secrets.RESEND_API_KEY }}" \
+          --build-arg RESEND_EMAIL_FROM="${{ secrets.RESEND_EMAIL_FROM }}" \
+          --build-arg SANITY_API_READ_TOKEN="${{ secrets.SANITY_API_READ_TOKEN }}" \
+          --build-arg SANITY_API_TOKEN="${{ secrets.SANITY_API_TOKEN }}" \
+          --build-arg SANITY_WEBHOOK_SECRET="${{ secrets.SANITY_WEBHOOK_SECRET }}" \
           -t ${{ secrets.OCIR_REGISTRY }}/${{ secrets.OCI_TENACY_NAMESPACE }}/${{ secrets.OCIR_REPO_NAME }}:preview .
       - name: Push Docker Image to Oracle Cloud Registry
         run: docker push ${{ secrets.OCIR_REGISTRY }}/${{ secrets.OCI_TENACY_NAMESPACE }}/${{ secrets.OCIR_REPO_NAME }}:preview
