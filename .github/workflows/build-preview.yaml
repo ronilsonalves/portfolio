@@ -27,7 +27,7 @@ jobs:
       - name: Build Docker Image
         run: |
           echo "Building the Docker image..." /
-          docker build /
+          docker build . /
           --platform linux/arm64 /
           --build-arg ALGOLIA_ADMIN_API_KEY="${{ secrets.ALGOLIA_ADMIN_API_KEY }}" \
           --build-arg CONTACT_MAIL_TO="${{ secrets.CONTACT_MAIL_TO }}" \
@@ -48,7 +48,7 @@ jobs:
           --build-arg SANITY_API_READ_TOKEN="${{ secrets.SANITY_API_READ_TOKEN }}" \
           --build-arg SANITY_API_TOKEN="${{ secrets.SANITY_API_TOKEN }}" \
           --build-arg SANITY_WEBHOOK_SECRET="${{ secrets.SANITY_WEBHOOK_SECRET }}" \
-          -t ${{ secrets.OCIR_REGISTRY }}/${{ secrets.OCI_TENACY_NAMESPACE }}/${{ secrets.OCIR_REPO_NAME }}:preview .
+          -t ${{ secrets.OCIR_REGISTRY }}/${{ secrets.OCI_TENACY_NAMESPACE }}/${{ secrets.OCIR_REPO_NAME }}:preview
       - name: Push Docker Image to Oracle Cloud Registry
         run: docker push ${{ secrets.OCIR_REGISTRY }}/${{ secrets.OCI_TENACY_NAMESPACE }}/${{ secrets.OCIR_REPO_NAME }}:preview
       # - name: Build and push Docker image
