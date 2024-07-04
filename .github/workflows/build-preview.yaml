@@ -27,7 +27,7 @@ jobs:
       - name: Build Docker Image
         run: |
           echo "Building the Docker image..." /
-          docker build . /
+          docker build --file ./Dockerfile /
           --platform linux/arm64 /
           --build-arg ALGOLIA_ADMIN_API_KEY="${{ secrets.ALGOLIA_ADMIN_API_KEY }}" \
           --build-arg CONTACT_MAIL_TO="${{ secrets.CONTACT_MAIL_TO }}" \
