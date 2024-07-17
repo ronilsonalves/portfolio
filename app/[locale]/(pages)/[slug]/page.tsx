@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: toPlainText(loadedPage.overview),
       images: [
         {
-          url: "https://c.ronilson.dev.br/images/og.png",
+          url: "https://c.ronilson.com/images/og.png",
           width: 1200,
           height: 630,
           alt: loadedPage.title + " – Ronilson Alves",
