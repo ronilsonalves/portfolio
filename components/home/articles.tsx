@@ -21,7 +21,7 @@ export default function Articles({ articles, locale }: ArticlesProps) {
   const t = useTranslations("Home.Articles");
   return (
     <section className="flex flex-col">
-      <div className="container py-10 lg:px-40 flex flex-col justify-end">
+      <div className="container py-10 2xl:px-40 flex flex-col justify-end">
         <h2 className="mb-5 text-5xl font-bold break-after-column">
           {t("Title")}
         </h2>
