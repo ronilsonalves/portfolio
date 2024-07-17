@@ -4,6 +4,8 @@ export const TagManager = ({ gtmId }: { gtmId: string }) => (
   <Script
     id="gtm-script"
     strategy="afterInteractive"
+    async
+    rel="preconnect"
     dangerouslySetInnerHTML={{
       __html: `
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -23,6 +25,7 @@ export const TagManagerNoScript = ({ gtmId }: { gtmId: string }) => (
       height="0"
       width="0"
       className="hidden absolute top-0 left-0"
+      rel="preconnect"
     />
   </noscript>
 );
