@@ -21,7 +21,17 @@ export default function Robots(): MetadataRoute.Robots {
         userAgent: "Mediapartners-Google",
         allow: "/",
         disallow: "/studio/",
-      }
+      },
+      {
+        userAgent: "bingbot",
+        allow: "/",
+        disallow: "/studio/",
+      },
+      {
+        userAgent: "DuckDuckBot",
+        allow: "/",
+        disallow: "/studio/",
+      },
     ],
     sitemap: process.env.NEXT_PUBLIC_SITE_URL + "/sitemap.xml",
   };
