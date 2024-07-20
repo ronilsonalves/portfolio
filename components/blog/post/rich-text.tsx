@@ -18,6 +18,8 @@ const AdSenseComponent = lazy(() =>
     default: mod.AdSenseComponent,
   })),
 );
+import { Player } from "@/components/shared/player";
+
 import { cn } from "@/lib/utils";
 
 const builder = imageUrlBuilder(client);
@@ -162,6 +164,18 @@ export const RichTextComponents = {
     },
     ads: ({ value }: any) => {
       return <AdSenseComponent adSlot={value.adsenseSlot} />;
+    },
+    video: ({ value }: any) => {
+      console.log("VIDEO VALUE: ", value);
+      return (
+        <div id={value.videoId} className="p-2">
+          <Player
+            videoId={value.videoId}
+            title={value.title}
+            service={value.videoProvider}
+          />
+        </div>
+      );
     },
   },
   marks: {

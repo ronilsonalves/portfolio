@@ -11,6 +11,7 @@ import post from "./schemas/documents/post";
 import project from "./schemas/documents/project";
 import service from "./schemas/documents/service";
 import timeline from "./schemas/objects/timeline";
+import video from "./schemas/objects/video";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -26,5 +27,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     service,
     // @ts-ignore due to an unknown sanity type definition error
     timeline,
+    video,
   ],
 };
