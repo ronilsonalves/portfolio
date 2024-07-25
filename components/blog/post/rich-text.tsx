@@ -1,7 +1,4 @@
-import Image from "next/image";
 import hljs from "highlight.js";
-import { lazy } from "react";
-import "highlight.js/styles/atom-one-dark.css";
 import bash from "highlight.js/lib/languages/bash";
 import golang from "highlight.js/lib/languages/go";
 import java from "highlight.js/lib/languages/java";
@@ -10,7 +7,11 @@ import json from "highlight.js/lib/languages/json";
 import sql from "highlight.js/lib/languages/sql";
 import typescript from "highlight.js/lib/languages/typescript";
 import yaml from "highlight.js/lib/languages/yaml";
+import "highlight.js/styles/atom-one-dark.css";
+import Image from "next/image";
+import { lazy } from "react";
 
+import { Player } from "@/components/shared/player";
 import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
 const AdSenseComponent = lazy(() =>
@@ -18,9 +19,10 @@ const AdSenseComponent = lazy(() =>
     default: mod.AdSenseComponent,
   })),
 );
-import { Player } from "@/components/shared/player";
 
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const builder = imageUrlBuilder(client);
 
@@ -179,8 +181,18 @@ export const RichTextComponents = {
     },
   },
   marks: {
-    link: ({ children, mark }: any) => {
-      return <a href={children[0].text}>{mark}</a>;
+    link: ({ value, children }: any) => {
+      return (
+        <Button
+          type="button"
+          variant={"link"}
+          rel="noopener noreferrer"
+          size={"sm"}
+          className="text-wrap text-left text-sm font-sans m-0 p-0 h-auto"
+        >
+          <Link href={value.href}>{children}</Link>
+        </Button>
+      );
     },
     em: ({ children }: any) => {
       return <em className="font-light italic">{children}</em>;
